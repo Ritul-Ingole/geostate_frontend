@@ -1,24 +1,48 @@
 
-import logo from './logo.svg';
-import './App.css';
+import { useEffect, useState } from "react";
+import PropertyCard from "./components/Property_Card";
+import MapView from "./components/MapView";
 
 function App() {
+  const [properties, setProperties] = useState([]);
+  const [loading, setLoading] = useState(true);
+  const [error, setError] = useState(null);
+
+  useEffect(() => {
+    fetch("http://localhost:8000/api/properties")
+      .then((res) => {
+        if (!res.ok) {
+          throw new Error("Failed to fetch properties");
+        }
+        return res.json();
+      })
+      .then((data) => {
+        setProperties(data);
+        setLoading(false);
+      })
+      .catch((err) => {
+        setError(err.message);
+        setLoading(false);
+      });
+  }, []);
+
+  if (loading) return <h2>Loading properties...</h2>;
+  if (error) return <h2>Error: {error}</h2>;
+
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+    <div style={{ display: "flex" }}>
+      {/* LEFT: property list */}
+      <div style={{ width: "40%", padding: "16px", overflowY: "auto" }}>
+        <h2>Properties</h2>
+        {properties.map((property) => (
+          <PropertyCard key={property._id} property={property} />
+        ))}
+      </div>
+
+      {/* RIGHT: map */}
+      <div style={{ width: "60%" }}>
+        <MapView properties={properties} />
+      </div>
     </div>
   );
 }
