@@ -4,6 +4,7 @@ import L from "leaflet";
 import markerIcon2x from "leaflet/dist/images/marker-icon-2x.png";
 import markerIcon from "leaflet/dist/images/marker-icon.png";
 import markerShadow from "leaflet/dist/images/marker-shadow.png";
+import MarkerClusterGroup from "react-leaflet-cluster";
 
 const normalIcon = new L.Icon({
   iconUrl: markerIcon,
@@ -22,7 +23,7 @@ const activeIcon = new L.Icon({
 });
 
 
-function MapView({ properties, activePropertyId }) {
+function MapView({ properties, activePropertyId, onMarkerClick }) {
   return (
     <MapContainer
       center={[18.5204, 73.8567]}
@@ -33,24 +34,27 @@ function MapView({ properties, activePropertyId }) {
         attribution="&copy; OpenStreetMap contributors"
         url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
       />
-console.log("MapView activePropertyId:", activePropertyId);
-      {properties.map((property) => {
-        const [lng, lat] = property.location.coordinates;
-        console.log(property.title, property.location.coordinates);
-        return (
-          <Marker
-            key={property._id}
-            position={[lat, lng]}
-            icon={property._id === activePropertyId ? activeIcon : normalIcon}
-          >
-            <Popup>
-              <strong>{property.title}</strong><br />
-              ₹{property.price}
-            </Popup>
-          </Marker>
-          
-        );
-      })}
+      <MarkerClusterGroup
+        chunkedLoading
+      >
+        {properties.map((property) => {
+          const [lng, lat] = property.location.coordinates;
+          return (
+            <Marker
+              key={property._id}
+              position={[lat, lng]}
+              icon={
+                property._id.toString() === activePropertyId
+                  ? activeIcon
+                  : normalIcon
+              }
+              eventHandlers={{
+                click: () => onMarkerClick(property._id.toString()),
+              }}
+            />
+          );
+        })}
+      </MarkerClusterGroup>
     </MapContainer> 
   );
 }

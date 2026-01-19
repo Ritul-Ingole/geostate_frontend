@@ -1,13 +1,14 @@
-
-import { useEffect, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import PropertyCard from "./components/Property_Card";
 import MapView from "./components/MapView";
+
 
 function App() {
   const [properties, setProperties] = useState([]);
   const [activePropertyId, setActivePropertyId] = useState(null);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
+  const cardRefs = useRef({});
   
   useEffect(() => {
     fetch("http://localhost:8000/api/properties")
@@ -42,13 +43,24 @@ function App() {
             key={property._id}
             property={property}
             onHover={setActivePropertyId}
+            ref={(el) => (cardRefs.current[property._id] = el)}
           />
-      ))}
+        ))}
+        
       </div>
-
       {/* RIGHT: map */}
       <div style={{ width: "60%" }}>
-        <MapView properties={properties} activePropertyId={activePropertyId} />
+        <MapView
+          properties={properties}
+          activePropertyId={activePropertyId}
+          onMarkerClick={(id) => {
+            setActivePropertyId(id);
+            cardRefs.current[id]?.scrollIntoView({
+              behavior: "smooth",
+              block: "start",
+            });
+          }}
+        />
       </div>
     </div>
   );
