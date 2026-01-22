@@ -5,6 +5,7 @@ import markerIcon2x from "leaflet/dist/images/marker-icon-2x.png";
 import markerIcon from "leaflet/dist/images/marker-icon.png";
 import markerShadow from "leaflet/dist/images/marker-shadow.png";
 import { useMapEvents } from "react-leaflet";
+import MapPopup  from "./MapPopup";
 
 const normalIcon = new L.Icon({
   iconUrl: markerIcon,
@@ -66,19 +67,11 @@ function MapView({
             }}
           >
             <Popup>
-              <div style={{ minWidth: "180px" }}>
-                <h4 style={{ margin: "0 0 4px 0" }}>{property.title}</h4>
-                <p style={{ margin: "0", fontSize: "14px" }}>
-                  ₹ {property.price}
-                </p>
-                <p style={{ margin: "0", fontSize: "12px", color: "#555" }}>
-                  {property.purpose.toUpperCase()} · {property.propertyType}
-                </p>
-              </div>
+              <MapPopup property={property} />
             </Popup>
-          </Marker>
-        );
-})}
+                      </Marker>
+                    );
+            })}
       <MapEvents onMoveEnd={onMapMove} />
     </MapContainer> 
   );
