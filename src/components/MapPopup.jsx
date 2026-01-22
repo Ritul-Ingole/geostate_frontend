@@ -1,3 +1,5 @@
+import { Link } from "react-router-dom";
+
 function MapPopup({ property }) {
   return (
     <div style={styles.container}>
@@ -10,6 +12,13 @@ function MapPopup({ property }) {
       <div style={styles.meta}>
         {property.purpose.toUpperCase()} · {property.propertyType}
       </div>
+
+      <Link
+        to={`/property/${property._id}`}
+        style={styles.link}
+      >
+        View Details →
+      </Link>
     </div>
   );
 }
@@ -34,6 +43,14 @@ const styles = {
   meta: {
     fontSize: "12px",
     color: "#555",
+  },
+  link: {
+  display: "inline-block",
+  marginTop: "6px",
+  fontSize: "12px",
+  color: "#007bff",
+  textDecoration: "none",
+  fontWeight: 500,
   },
 };
 
