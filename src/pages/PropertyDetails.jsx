@@ -1,21 +1,34 @@
 import { useParams } from "react-router-dom";
 import { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
+import ImageCarousel from "../components/ImageCarousal.jsx";
 
 function PropertyDetails() {
   const { id } = useParams();
   const [property, setProperty] = useState(null);
 
   useEffect(() => {
-    fetch(`http://localhost:8000/api/properties/${id}`)
+    fetch(`http://localhost:8000/api/properties/${id}`, {
+  cache: "no-store"
+})
+      
       .then((res) => res.json())
-      .then(setProperty);
+      .then((data) => {
+        console.log("Property fetched:", data.data);
+        setProperty(data.data);
+      });
   }, [id]);
 
   if (!property) return <h2>Loading property...</h2>;
+  
+  console.log("Images:", property.images);
 
   return (
   <div style={{ padding: "32px", maxWidth: "800px", margin: "0 auto" }}>
+
+    <ImageCarousel images={property.images} />
+
+
     <Link
       to="/"
       style={{
@@ -46,7 +59,22 @@ function PropertyDetails() {
       </div>
     )}
   </div>
+  
 );
-}
 
+}
+// const styles = {
+//   gallery: {
+//     display: "grid",
+//     gridTemplateColumns: "repeat(auto-fit, minmax(240px, 1fr))",
+//     gap: "12px",
+//     marginBottom: "24px",
+//   },
+//   image: {
+//     width: "100%",
+//     height: "200px",
+//     objectFit: "cover",
+//     borderRadius: "8px",
+//   },
+// };
 export default PropertyDetails; 
