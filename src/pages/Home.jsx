@@ -3,6 +3,7 @@ import MapView from "../components/MapView";
 import PropertyCard from "../components/Property_Card";
 import { useAuth } from "../context/AuthContext";
 import { useNavigate } from "react-router-dom";
+import "../styles/Home.css";
 
 function Home() {
   const { token } = useAuth();
@@ -62,7 +63,7 @@ function Home() {
       {/* LEFT PANEL */}
       <div
         style={{
-          width: "40%",
+          width: "50%",
           padding: "16px",
           overflowY: "auto",
           borderRight: "1px solid #ddd",
@@ -115,7 +116,8 @@ function Home() {
         </div>
 
         {/* Property Cards */}
-        {filteredProperties.map((property) => (
+        <div className="property-cards-container">
+          {filteredProperties.map((property) => (
           <PropertyCard
             key={property._id}
             property={property}
@@ -123,10 +125,12 @@ function Home() {
             ref={(el) => (cardRefs.current[property._id] = el)}
           />
         ))}
+        </div>
+        
       </div>
 
       {/* RIGHT PANEL (MAP) */}
-      <div style={{ width: "60%" }}>
+      <div style={{ width: "50%", height: "100%" }}>
         <MapView
           properties={filteredProperties}
           activePropertyId={activePropertyId}

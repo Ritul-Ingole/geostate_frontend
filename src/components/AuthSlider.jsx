@@ -6,6 +6,7 @@ import { useNavigate } from "react-router-dom";
 import { useRef } from "react";
 import Lottie from "lottie-react";
 import Home from "../assets/Home.json";
+import { Building2 } from 'lucide-react';
 
 const AuthSlider = () => {
   const [isSignUp, setIsSignUp] = useState(false);
@@ -21,51 +22,65 @@ const AuthSlider = () => {
       <div className="forms">
         {/* SIGN IN */}
         <div className={`signin-form sign-in ${isSignUp ? "hide-left" : ""}`}>
+          <div className="building-icon-container-container">
+            <div className="building-icon-container">
+              <Building2 size={40} strokeWidth={1.25} className="w-8 h-8 text-white" />
+            </div>
+          </div>
+          
+          
           <h2>Welcome Back</h2>
           <p>Sign in to continue your journey</p>
-
-          <div className="signin-field">
-            <Mail />
-            <input
-                placeholder="Email"
-                value={signin.email}
-                onChange={(e) => setSignin({ ...signin, email: e.target.value })}
-                />
+          
+          <div className="signin-field-container">
+            <p>Email Address</p>
+              <div className="signin-field">
+                <Mail className="absolute left-3 top-1/2 transform -translate-y-1/2 w-5 h-5 text-gray-400" />
+                <input
+                    placeholder="you@example.com"
+                    value={signin.email}
+                    onChange={(e) => setSignin({ ...signin, email: e.target.value })}
+                    />
+              </div>
+              <p>Password</p>
+              <div className="signin-field">
+                
+                <Lock />
+                <input
+                    type="password"
+                    placeholder="Enter your password"
+                    value={signin.password}
+                    onChange={(e) => setSignin({ ...signin, password: e.target.value })}
+                    />
+              </div>
           </div>
+          
+          <div className="signin-primary-btn-container">
+            <button
+              className="signin-primary-btn"
+              disabled={loading}
+              onClick={async () => {
+                  setLoading(true);
 
-          <div className="signin-field">
-            <Lock />
-            <input
-                type="password"
-                placeholder="Password"
-                value={signin.password}
-                onChange={(e) => setSignin({ ...signin, password: e.target.value })}
-                />
+                  const res = await fetch("http://localhost:8000/api/auth/login", {
+                  method: "POST",
+                  headers: { "Content-Type": "application/json" },
+                  body: JSON.stringify(signin),
+                  });
+
+                  const data = await res.json();
+                  setLoading(false);
+
+                  if (!res.ok) return alert(data.error);
+
+                  login(data.token, data.user);
+                  navigate("/");
+              }}
+              >
+              {loading ? "Signing In..." : <>Sign In  <ArrowRight size={16} strokeWidth={3} /></>}
+            </button>
           </div>
-
-          <button
-            className="signin-primary-btn"
-            disabled={loading}
-            onClick={async () => {
-                setLoading(true);
-
-                const res = await fetch("http://localhost:8000/api/auth/login", {
-                method: "POST",
-                headers: { "Content-Type": "application/json" },
-                body: JSON.stringify(signin),
-                });
-
-                const data = await res.json();
-                setLoading(false);
-
-                if (!res.ok) return alert(data.error);
-
-                login(data.token, data.user);
-                navigate("/");
-            }}
-            >
-            {loading ? "Signing In..." : <>Sign In  <ArrowRight size={16} strokeWidth={3} /></>}
-          </button>
+          
 
           <p className="mobile-switch">
             Don’t have an account?{" "}

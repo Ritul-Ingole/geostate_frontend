@@ -1,0 +1,24 @@
+.property-cards-container {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 16px;
+
+}
+
+.property-cards {
+  border: 1px solid #ddd;
+  border-radius: 8px;
+  padding: 16px;
+  margin-bottom: 16px;
+  background-color: #fff;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  transition: box-shadow 0.3s ease;
+  width: 200%;
+  height: 91%;
+}
+
+@media (max-width: 900px) {
+  .property-cards-container {
+    grid-template-columns: 1fr;
+  }
+}
