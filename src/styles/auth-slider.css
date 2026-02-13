@@ -79,8 +79,7 @@
   align-items: center;
   justify-content: center;
   width: 75%;
-  margin-top: 5%;
-  height: 50%;
+  height: 40%;
 }
 
 .signin-field-container p{
@@ -98,7 +97,6 @@
   padding: 12px;
   border-radius: 10px;
   margin-bottom: 16px;
-  margin-top: ;
   width: 70%;
 }
 
