@@ -54,7 +54,7 @@
 import React from 'react';
 import { useNavigate } from 'react-router-dom';
 import { useAuth } from '../context/AuthContext';
-import { LogOut, User, Home } from 'lucide-react';
+import { LogOut, User, Home} from 'lucide-react';
 import '../styles/Navbar.css';
 
 const Navbar = () => {
@@ -79,9 +79,9 @@ const Navbar = () => {
             <User className="user-icon" />
             <span className="user-name">{user?.name}</span>
           </div>
-          <button className="logout-button" onClick={handleLogout}>
-            <LogOut size={18} />
-            <span>Logout</span>
+          <button className="logout-button" onClick={handleLogout} style={{borderRadius: "4px", padding: "6px 12px"}}>
+            <LogOut size={20} style={{ color: "black" }}/>
+            <span style={{ color: "black" }}>Logout</span>
           </button>
         </div>
       </div>

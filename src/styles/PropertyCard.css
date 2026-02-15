@@ -1,206 +1,269 @@
-/* Property Card Styling */
-.property-card {
+/* Zillow-Style Property Card */
+.zillow-card {
   background: white;
   border-radius: 8px;
   overflow: hidden;
-  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.08);
+  box-shadow: 0 1px 4px rgba(0,0,0,0.1);
   cursor: pointer;
-  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
-  border: 2px solid transparent;
-  display: flex;
-  flex-direction: column;
+  transition: all 0.2s ease;
+  position: relative;
 }
 
-.property-card:hover {
-  box-shadow: 0 8px 16px rgba(0, 0, 0, 0.12);
+.zillow-card:hover {
+  box-shadow: 0 4px 12px rgba(0,0,0,0.15);
   transform: translateY(-2px);
 }
 
-.property-card.active {
-  border-color: #667eea;
-  box-shadow: 0 8px 24px rgba(102, 126, 234, 0.2);
+.zillow-card-highlighted {
+  box-shadow: 0 0 0 3px #0066ff, 0 4px 12px rgba(0,0,0,0.15);
+  transform: translateY(-2px);
 }
 
-/* Image Carousel Container */
-.card-carousel-container {
+/* Image Container */
+.zillow-image-container {
   position: relative;
   width: 100%;
-  height: 200px;
+  height: 240px;
+  background-color: #f5f5f5;
   overflow: hidden;
-  background-color: #f0f0f0;
 }
 
-.card-carousel-image {
+.zillow-image {
   width: 100%;
   height: 100%;
   object-fit: cover;
   transition: transform 0.3s ease;
 }
 
-.property-card:hover .card-carousel-image {
+.zillow-card:hover .zillow-image {
   transform: scale(1.05);
 }
 
-/* Carousel Navigation Buttons */
-.carousel-btn {
+/* Navigation Buttons */
+.zillow-nav-btn {
   position: absolute;
   top: 50%;
   transform: translateY(-50%);
-  background: rgba(0, 0, 0, 0.5);
-  color: white;
+  background: rgba(255, 255, 255, 0.95);
+  border: none;
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  opacity: 0;
+  z-index: 2;
+  box-shadow: 0 2px 8px rgba(0,0,0,0.15);
+}
+
+.zillow-card:hover .zillow-nav-btn {
+  opacity: 1;
+}
+
+.zillow-nav-btn:hover {
+  background: white;
+  transform: translateY(-50%) scale(1.1);
+}
+
+.zillow-nav-prev {
+  left: 8px;
+}
+
+.zillow-nav-next {
+  right: 8px;
+}
+
+.zillow-nav-btn svg {
+  color: #333;
+}
+
+/* Favorite Button */
+.zillow-favorite-btn {
+  position: absolute;
+  top: 12px;
+  right: 12px;
+  background: rgba(255, 255, 255, 0.95);
   border: none;
   width: 36px;
   height: 36px;
   border-radius: 50%;
-  cursor: pointer;
   display: flex;
   align-items: center;
   justify-content: center;
-  transition: all 0.2s ease;
-  z-index: 10;
-}
-
-.carousel-btn:hover {
-  background: rgba(0, 0, 0, 0.7);
-  transform: translateY(-50%) scale(1.1);
-}
-
-.carousel-prev {
-  left: 8px;
-}
-
-.carousel-next {
-  right: 8px;
-}
-
-/* Image Counter */
-.image-counter {
-  position: absolute;
-  bottom: 8px;
-  right: 8px;
-  background: rgba(0, 0, 0, 0.6);
-  color: white;
-  padding: 4px 8px;
-  border-radius: 4px;
-  font-size: 11px;
-  font-weight: 600;
-  z-index: 10;
-}
-
-/* Carousel Dots */
-.carousel-dots {
-  position: absolute;
-  bottom: 8px;
-  left: 50%;
-  transform: translateX(-50%);
-  display: flex;
-  gap: 6px;
-  z-index: 10;
-}
-
-.dot {
-  width: 8px;
-  height: 8px;
-  border-radius: 50%;
-  background: rgba(255, 255, 255, 0.5);
-  border: none;
   cursor: pointer;
   transition: all 0.2s ease;
-  padding: 0;
+  z-index: 3;
+  box-shadow: 0 2px 8px rgba(0,0,0,0.1);
 }
 
-.dot.active {
+.zillow-favorite-btn:hover {
   background: white;
-  width: 24px;
-  border-radius: 4px;
+  transform: scale(1.1);
 }
 
-.dot:hover {
-  background: rgba(255, 255, 255, 0.8);
+.zillow-favorite-btn svg {
+  color: #666;
+  transition: all 0.2s ease;
 }
 
-/* Purpose Tag */
-.purpose-tag {
+.zillow-favorite-btn.favorited svg {
+  color: #e02424;
+}
+
+/* Purpose Badge */
+.zillow-badge {
   position: absolute;
-  top: 8px;
-  left: 8px;
-  display: inline-block;
-  color: white;
+  top: 12px;
+  left: 12px;
   padding: 6px 12px;
   border-radius: 4px;
   font-size: 11px;
   font-weight: 700;
-  text-transform: uppercase;
+  color: white;
   letter-spacing: 0.5px;
-  z-index: 10;
-  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+  z-index: 2;
+  box-shadow: 0 2px 8px rgba(0,0,0,0.15);
 }
 
-/* Card Content */
-.card-content {
-  padding: 14px;
+/* Image Dots */
+.zillow-dots {
+  position: absolute;
+  bottom: 12px;
+  left: 50%;
+  transform: translateX(-50%);
+  display: flex;
+  gap: 6px;
+  z-index: 2;
+}
+
+.zillow-dot {
+  width: 6px;
+  height: 6px;
+  border-radius: 50%;
+  background: rgba(255, 255, 255, 0.6);
+  transition: all 0.2s ease;
+}
+
+.zillow-dot.active {
+  background: white;
+  width: 20px;
+  border-radius: 3px;
+}
+
+/* Content Section */
+.zillow-content {
+  padding: 16px;
   display: flex;
   flex-direction: column;
-  gap: 6px;
-  flex: 1;
+  gap: 8px;
 }
 
-/* Card Title */
-.card-title {
-  margin: 0;
-  font-size: 15px;
+/* Price Row */
+.zillow-price-row {
+  display: flex;
+  align-items: baseline;
+  gap: 8px;
+}
+
+.zillow-price {
+  font-size: 22px;
   font-weight: 700;
-  color: #222;
-  line-height: 1.3;
-  word-break: break-word;
+  color: #2a2a33;
+}
+
+.zillow-fees {
+  font-size: 12px;
+  color: #767676;
+}
+
+/* Property Details */
+.zillow-details {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  font-size: 14px;
+  color: #2a2a33;
+  flex-wrap: wrap;
+}
+
+.zillow-detail {
+  font-weight: 500;
+}
+
+.zillow-separator {
+  color: #d4d4d4;
+  font-weight: 300;
+}
+
+/* Address */
+.zillow-address {
+  font-size: 14px;
+  color: #767676;
+  line-height: 1.4;
   display: -webkit-box;
   -webkit-line-clamp: 2;
   -webkit-box-orient: vertical;
   overflow: hidden;
 }
 
-/* Card Price */
-.card-price {
-  margin: 0;
-  font-size: 16px;
-  font-weight: 700;
-  color: #667eea;
+/* Listing Info */
+.zillow-listing-info {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  padding-top: 8px;
+  border-top: 1px solid #f0f0f0;
+  margin-top: 4px;
 }
 
-/* Card Property Type */
-.card-property-type {
-  margin: 0;
+.zillow-days-ago {
   font-size: 12px;
-  color: #999;
-  font-weight: 500;
-  text-transform: capitalize;
+  color: #767676;
 }
 
 /* Responsive */
 @media (max-width: 768px) {
-  .card-content {
+  .zillow-image-container {
+    height: 200px;
+  }
+
+  .zillow-content {
     padding: 12px;
-    gap: 4px;
+    gap: 6px;
   }
 
-  .card-carousel-container {
-    height: 160px;
+  .zillow-price {
+    font-size: 20px;
   }
 
-  .card-title {
-    font-size: 14px;
+  .zillow-details {
+    font-size: 13px;
   }
 
-  .card-price {
-    font-size: 14px;
+  .zillow-nav-btn {
+    width: 36px;
+    height: 36px;
   }
 
-  .carousel-btn {
+  .zillow-favorite-btn {
     width: 32px;
     height: 32px;
   }
+}
 
-  .purpose-tag {
+@media (max-width: 480px) {
+  .zillow-image-container {
+    height: 180px;
+  }
+
+  .zillow-price {
+    font-size: 18px;
+  }
+
+  .zillow-badge {
     font-size: 10px;
     padding: 4px 8px;
   }

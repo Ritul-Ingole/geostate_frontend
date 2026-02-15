@@ -2,7 +2,6 @@ import { Routes, Route, Navigate, useLocation } from "react-router-dom";
 import Home from "./pages/Home";
 import Login from "./pages/Login";
 import Register from "./pages/Register";
-import Navbar from "./components/Navbar";
 import PropertyDetails from "./pages/PropertyDetails";
 import "./styles/App.css";
 
@@ -15,7 +14,7 @@ function App() {
 
   return (
     <>
-      {!isAuthPage && <Navbar />}
+      {!isAuthPage}
 
       <Routes>
         <Route path="/login" element={<Login />} />
