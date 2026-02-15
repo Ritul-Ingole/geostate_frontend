@@ -3,6 +3,7 @@ import MapView from "../components/MapView";
 import PropertyCard from "../components/Property_Card";
 import { useAuth } from "../context/AuthContext";
 import { useNavigate } from "react-router-dom";
+import { MapPin, DollarSign, Home as HomeIcon, Search } from "lucide-react";
 import "../styles/Home.css";
 
 function Home() {
@@ -50,6 +51,7 @@ function Home() {
   }, [searchMode]);
 
   if (!Array.isArray(properties)) return null;
+  
   // Filters
   const filteredProperties = properties.filter((property) => {
     const matchesPurpose =
@@ -58,52 +60,69 @@ function Home() {
     return matchesPurpose && matchesPrice;
   });
 
-  return (
-    <div style={{ display: "flex", height: "100vh" }}>
-      {/* LEFT PANEL */}
-      <div
-        style={{
-          width: "50%",
-          padding: "16px",
-          overflowY: "auto",
-          borderRight: "1px solid #ddd",
-        }}
-      >
-        <h2>Properties</h2>
+  const formatPrice = (price) => {
+    if (price >= 10000000) return (price / 10000000).toFixed(1) + "Cr";
+    if (price >= 100000) return (price / 100000).toFixed(1) + "L";
+    return "₹" + price.toLocaleString();
+  };
 
-        {/* Filters */}
-        <div style={{ marginBottom: "12px" }}>
-          <label>
-            Search Mode:&nbsp;
+  return (
+    <div className="home-container">
+      {/* LEFT PANEL - PROPERTIES & FILTERS */}
+      <div className="left-panel">
+        {/* Header */}
+        <div className="property-header">
+          <div className="header-title">
+            <HomeIcon size={28} className="header-icon" />
+            <div>
+              <h2>Discover Properties</h2>
+              <p className="result-count">{filteredProperties.length} properties found</p>
+            </div>
+          </div>
+        </div>
+
+        {/* Filters Section */}
+        <div className="filters-section">
+          <div className="filter-group">
+            <label className="filter-label">
+              <Search size={18} />
+              <span>Search Mode</span>
+            </label>
             <select
               value={searchMode}
               onChange={(e) => setSearchMode(e.target.value)}
+              className="filter-select"
             >
-              <option value="all">All</option>
-              <option value="nearby">Nearby</option>
+              <option value="all">All Properties</option>
+              <option value="nearby">Nearby Properties</option>
             </select>
-          </label>
-        </div>
+          </div>
 
-        <div style={{ marginBottom: "12px" }}>
-          <label>
-            Purpose:&nbsp;
+          <div className="filter-group">
+            <label className="filter-label">
+              <HomeIcon size={18} />
+              <span>Property Type</span>
+            </label>
             <select
               value={purposeFilter}
               onChange={(e) => setPurposeFilter(e.target.value)}
+              className="filter-select"
             >
-              <option value="all">All</option>
-              <option value="rent">Rent</option>
-              <option value="sell">Sell</option>
-              <option value="buy">Buy</option>
+              <option value="all">All Types</option>
+              <option value="rent">For Rent</option>
+              <option value="sell">For Sale</option>
+              <option value="buy">For Buy</option>
             </select>
-          </label>
-        </div>
+          </div>
 
-        <div style={{ marginBottom: "12px" }}>
-          <label>
-            Max Price: ₹{maxPrice}
-            <br />
+          <div className="filter-group">
+            <label className="filter-label">
+              <DollarSign size={18} />
+              <span>Max Price</span>
+            </label>
+            <div className="price-display">
+              {formatPrice(maxPrice)}
+            </div>
             <input
               type="range"
               min="10000"
@@ -111,26 +130,39 @@ function Home() {
               step="50000"
               value={maxPrice}
               onChange={(e) => setMaxPrice(Number(e.target.value))}
+              className="price-slider"
             />
-          </label>
+            <div className="price-range-labels">
+              <span>₹10K</span>
+              <span>₹15Cr</span>
+            </div>
+          </div>
         </div>
 
-        {/* Property Cards */}
-        <div className="property-cards-container">
-          {filteredProperties.map((property) => (
-          <PropertyCard
-            key={property._id}
-            property={property}
-            onHover={setActivePropertyId}
-            ref={(el) => (cardRefs.current[property._id] = el)}
-          />
-        ))}
+        {/* Properties List */}
+        <div className="properties-list">
+          {filteredProperties.length === 0 ? (
+            <div className="no-results">
+              <HomeIcon size={48} />
+              <p>No properties match your filters</p>
+              <small>Try adjusting your search criteria</small>
+            </div>
+          ) : (
+            filteredProperties.map((property) => (
+              <PropertyCard
+                key={property._id}
+                property={property}
+                isActive={property._id.toString() === activePropertyId}
+                onHover={setActivePropertyId}
+                ref={(el) => (cardRefs.current[property._id] = el)}
+              />
+            ))
+          )}
         </div>
-        
       </div>
 
-      {/* RIGHT PANEL (MAP) */}
-      <div style={{ width: "50%", height: "100%" }}>
+      {/* RIGHT PANEL - MAP */}
+      <div className="map-panel">
         <MapView
           properties={filteredProperties}
           activePropertyId={activePropertyId}
@@ -138,7 +170,7 @@ function Home() {
             setActivePropertyId(id);
             cardRefs.current[id]?.scrollIntoView({
               behavior: "smooth",
-              block: "start",
+              block: "nearest",
             });
           }}
           onMapMove={(center) => {
