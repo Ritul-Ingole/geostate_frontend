@@ -221,8 +221,8 @@ function Home() {
                   >
                     <PropertyCard
                       property={property}
-                      isHighlighted={activePropertyId === property._id}
-                      onMouseEnter={() => setActivePropertyId(property._id)}
+                      isHighlighted={activePropertyId === property._id.toString()}
+                      onMouseEnter={() => setActivePropertyId(property._id.toString())}
                       onMouseLeave={() => setActivePropertyId(null)}
                     />
                   </div>
@@ -235,7 +235,7 @@ function Home() {
           <div className="map-panel">
             <MapView
               properties={filteredProperties}
-              highlightedProperty={activePropertyId}
+              activePropertyId={activePropertyId}
               onMarkerClick={handleMarkerClick}
               onMapMove={handleMapMove}
             />

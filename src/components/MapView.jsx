@@ -69,9 +69,9 @@ function MapView({
             <Popup>
               <MapPopup property={property} />
             </Popup>
-                      </Marker>
-                    );
-            })}
+          </Marker>
+        );
+      })}
       <MapEvents onMoveEnd={onMapMove} />
     </MapContainer> 
   );

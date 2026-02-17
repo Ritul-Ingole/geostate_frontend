@@ -10,13 +10,13 @@ import { Building2 } from 'lucide-react';
 
 const AuthSlider = () => {
   const [isSignUp, setIsSignUp] = useState(false);
-    const { login } = useAuth();
-    const navigate = useNavigate();
+  const { login } = useAuth();
+  const navigate = useNavigate();
 
-    const [signin, setSignin] = useState({ email: "", password: "" });
-    const [signup, setSignup] = useState({ name: "", email: "", password: "" });
-    const [loading, setLoading] = useState(false);
-    const lottieRef = useRef(null);
+  const [signin, setSignin] = useState({ email: "", password: "" });
+  const [signup, setSignup] = useState({ name: "", email: "", password: "" });
+  const [loading, setLoading] = useState(false);
+  const lottieRef = useRef(null);
   return (
     <div className="auth-slider">
       <div className="forms">

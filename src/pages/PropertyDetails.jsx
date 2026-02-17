@@ -30,7 +30,7 @@ function PropertyDetails() {
 
 
     <Link
-      to="/"
+      to="/home"
       style={{
         display: "inline-block",
         marginBottom: "16px",
