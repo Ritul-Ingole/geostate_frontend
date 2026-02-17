@@ -5,6 +5,7 @@ const AuthContext = createContext();
 export const AuthProvider = ({ children }) => {
   const [user, setUser] = useState(null);
   const [token, setToken] = useState(null);
+  const [loading, setLoading] = useState(true); // ← ADDED: prevents flash redirect
 
   useEffect(() => {
     const storedToken = localStorage.getItem("token");
@@ -14,13 +15,15 @@ export const AuthProvider = ({ children }) => {
       setToken(storedToken);
       setUser(JSON.parse(storedUser));
     }
+
+    setLoading(false); // ← Done checking localStorage
   }, []);
 
   const login = (token, user) => {
-    localStorage.setItem("token", token);
-    localStorage.setItem("user", JSON.stringify(user));
     setToken(token);
     setUser(user);
+    localStorage.setItem("token", token);
+    localStorage.setItem("user", JSON.stringify(user));
   };
 
   const logout = () => {
@@ -31,7 +34,14 @@ export const AuthProvider = ({ children }) => {
   };
 
   return (
-    <AuthContext.Provider value={{ user, token, login, logout }}>
+    <AuthContext.Provider value={{
+      user,
+      token,
+      login,
+      logout,
+      loading,                  // ← ADDED
+      isAuthenticated: !!token  // ← ADDED: ProtectedRoute needs this
+    }}>
       {children}
     </AuthContext.Provider>
   );

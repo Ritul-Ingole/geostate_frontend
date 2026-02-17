@@ -74,7 +74,7 @@ const AuthSlider = () => {
                   if (!res.ok) return alert(data.error);
 
                   login(data.token, data.user);
-                  navigate("/");
+                  navigate("/home");
               }}
               >
               {loading ? "Signing In..." : <>Sign In  <ArrowRight size={16} strokeWidth={3} /></>}
@@ -138,7 +138,8 @@ const AuthSlider = () => {
 
                 if (!res.ok) return alert(data.error);
 
-                setIsSignUp(false);
+                login(data.token, data.user);
+                navigate("/home");
             }}
             >
             {loading ? "Creating..." : <>Create Account <ArrowRight size={16} strokeWidth={3} /></>}

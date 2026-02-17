@@ -46,8 +46,8 @@ const PropertyCard = ({ property, isHighlighted, onMouseEnter, onMouseLeave }) =
   const getPurposeBadge = () => {
     const badges = {
       rent: { text: 'FOR RENT', color: '#0066ff' },
-      sell: { text: 'FOR SALE', color: '#ef4444' },
-      buy: { text: 'FOR BUY', color: '#10b981' }
+      sell: { text: 'FOR SALE', color: '#10b981' },
+      buy: { text: 'SOLD', color: '#ef4444' }
     };
     return badges[property.purpose] || badges.rent;
   };
