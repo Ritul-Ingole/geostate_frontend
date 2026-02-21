@@ -11,7 +11,7 @@ const Landing = () => {
     e.preventDefault();
     if (searchQuery.trim()) {
       // Navigate to home page with search query
-      navigate(`/?search=${encodeURIComponent(searchQuery.trim())}`);
+      navigate(`/home?search=${encodeURIComponent(searchQuery.trim())}`);
     } else {
       // Navigate to home page without search
       navigate('/home');
@@ -22,7 +22,6 @@ const Landing = () => {
   <button onClick={() => navigate('/home?purpose=rent')}>
     Find rentals
   </button>
-
   
   return (
     <div className="landing-page">
@@ -163,7 +162,7 @@ const Landing = () => {
             </p>
             <button 
               className="service-button"
-              onClick={() => navigate('/?purpose=rent')}
+              onClick={() => navigate('/home?purpose=rent')}
             >
               Find rentals
             </button>

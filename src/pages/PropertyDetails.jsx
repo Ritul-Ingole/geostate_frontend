@@ -9,14 +9,14 @@ function PropertyDetails() {
 
   useEffect(() => {
     fetch(`http://localhost:8000/api/properties/${id}`, {
-  cache: "no-store"
-})
+      cache: "no-store"
+    })
       
-      .then((res) => res.json())
-      .then((data) => {
-        console.log("Property fetched:", data.data);
-        setProperty(data.data);
-      });
+    .then((res) => res.json())
+    .then((data) => {
+      console.log("Property fetched:", data.data);
+      setProperty(data.data);
+    });
   }, [id]);
 
   if (!property) return <h2>Loading property...</h2>;

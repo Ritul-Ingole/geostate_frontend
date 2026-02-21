@@ -5,6 +5,7 @@ import Login from "./pages/Login";
 import Register from "./pages/Register";
 import PropertyDetails from "./pages/PropertyDetails";
 import Landing from './pages/Landing';
+import Intro from './pages/Intro';
 import { AuthProvider } from './context/AuthContext';
 import ProtectedRoute from './components/ProtectedRoute';
 import "./styles/App.css";
@@ -13,8 +14,11 @@ function App() {
   return (
     <AuthProvider>
         <Routes>
-          {/* Landing - default public page */}
-          <Route path="/" element={<Landing />} />
+          {/* Intro animation - default entry point */}
+          <Route path="/" element={<Intro />} />
+
+          {/* Landing page - shown after intro */}
+          <Route path="/landing" element={<Landing />} />
 
           {/* Auth pages - public */}
           <Route path="/login" element={<Login />} />

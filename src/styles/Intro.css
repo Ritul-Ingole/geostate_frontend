@@ -1,0 +1,148 @@
+  /* ─── Intro Screen ─────────────────────────────────────────────────── */
+.intro-screen {
+  position: fixed;
+  inset: 0;
+  background: #0f172a;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 9999;
+  overflow: hidden;
+}
+
+/* ─── White fill that zooms out from the lottie to cover screen ─────── */
+.intro-zoom-fill {
+  position: absolute;
+  width: 0px;
+  height: 0px;
+  border-radius: 50%;
+  background: white;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%) scale(0);
+  transition: none;
+  z-index: 1;
+  pointer-events: none;
+}
+
+/* When zooming phase starts, explode the white circle to cover screen */
+.phase-zooming .intro-zoom-fill {
+  width: 300vmax;
+  height: 300vmax;
+  transform: translate(-50%, -50%) scale(1);
+  transition: transform 0.8s cubic-bezier(0.4, 0, 0.2, 1),
+              width 0s,
+              height 0s;
+}
+
+/* ─── Content ───────────────────────────────────────────────────────── */
+.intro-content {
+  position: relative;
+  z-index: 2;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 20px;
+}
+
+/* Content fades and scales up during zoom phase */
+.phase-zooming .intro-content {
+  animation: content-zoom-up 0.8s cubic-bezier(0.4, 0, 0.2, 1) both;
+}
+
+@keyframes content-zoom-up {
+  0% {
+    opacity: 1;
+    transform: scale(1);
+  }
+  60% {
+    opacity: 0;
+    transform: scale(2.5);
+  }
+  100% {
+    opacity: 0;
+    transform: scale(3);
+  }
+}
+
+/* ─── Lottie wrapper ────────────────────────────────────────────────── */
+.intro-lottie-wrapper {
+  animation: lottie-enter 0.5s ease both;
+}
+
+@keyframes lottie-enter {
+  from {
+    opacity: 0;
+    transform: scale(0.7);
+  }
+  to {
+    opacity: 1;
+    transform: scale(1);
+  }
+}
+
+.intro-lottie {
+  width: 220px;
+  height: 220px;
+  filter: drop-shadow(0 0 40px rgba(99, 179, 237, 0.4));
+}
+
+/* ─── Brand text ────────────────────────────────────────────────────── */
+.intro-brand {
+  text-align: center;
+  animation: brand-enter 0.6s ease 0.4s both;
+}
+
+@keyframes brand-enter {
+  from {
+    opacity: 0;
+    transform: translateY(12px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.intro-title {
+  font-size: 42px;
+  font-weight: 800;
+  color: white;
+  margin: 0 0 8px 0;
+  letter-spacing: -1px;
+  background: linear-gradient(135deg, #60a5fa, #a78bfa);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+
+.intro-tagline {
+  font-size: 16px;
+  color: #94a3b8;
+  margin: 0;
+  letter-spacing: 0.5px;
+}
+
+/* ─── Loading dots ──────────────────────────────────────────────────── */
+.intro-dots {
+  display: flex;
+  gap: 6px;
+  margin-top: 32px;
+  animation: brand-enter 0.6s ease 0.8s both;
+}
+
+.intro-dot {
+  width: 6px;
+  height: 6px;
+  border-radius: 50%;
+  background: #475569;
+  animation: dot-pulse 1.2s ease-in-out infinite;
+}
+
+.intro-dot:nth-child(2) { animation-delay: 0.2s; }
+.intro-dot:nth-child(3) { animation-delay: 0.4s; }
+
+@keyframes dot-pulse {
+  0%, 100% { background: #475569; transform: scale(1); }
+  50%       { background: #60a5fa; transform: scale(1.4); }
+}

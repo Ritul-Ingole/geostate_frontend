@@ -1,10 +1,12 @@
 import React, { useState } from 'react';
 import { ChevronLeft, ChevronRight, Heart, MapPin } from 'lucide-react';
 import '../styles/PropertyCard.css';
+import { useNavigate } from "react-router-dom";
 
 const PropertyCard = ({ property, isHighlighted, onMouseEnter, onMouseLeave }) => {
   const [currentImageIndex, setCurrentImageIndex] = useState(0);
   const [isFavorite, setIsFavorite] = useState(false);
+  const navigate = useNavigate();
 
   const images = property.images && property.images.length > 0 ? property.images : [];
   const imageUrl = images.length > 0 
@@ -59,6 +61,7 @@ const PropertyCard = ({ property, isHighlighted, onMouseEnter, onMouseLeave }) =
       className={`zillow-card ${isHighlighted ? 'zillow-card-highlighted' : ''}`}
       onMouseEnter={onMouseEnter}
       onMouseLeave={onMouseLeave}
+      onClick={() => navigate(`/property/${property._id}`)}
     >
       {/* Image Section */}
       <div className="zillow-image-container">
