@@ -19,7 +19,7 @@ const Intro = () => {
     // After animation (~2s), start zoom-in transition
     const zoomTimer = setTimeout(() => {
       setPhase("zooming");
-    }, 2400);
+    }, 2000);
 
     // After zoom completes, navigate to landing
     const navTimer = setTimeout(() => {

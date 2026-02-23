@@ -29,7 +29,7 @@ const Landing = () => {
       <nav className="landing-navbar">
         <div className="landing-navbar-content">
           <div className="landing-logo">
-            <Home size={32} className="logo-icon" />
+            <Home size={32} className="logo-icon" onClick={() => navigate('/landing')}/>
             <span className="logo-text">GeoState</span>
           </div>
           

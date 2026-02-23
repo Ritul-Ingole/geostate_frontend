@@ -70,7 +70,7 @@ const Navbar = () => {
     <nav className="navbar">
       <div className="navbar-container">
         <div className="navbar-brand">
-          <Home className="navbar-logo-icon" />
+          <Home className="navbar-logo-icon" onClick={() => navigate('/landing')}/>
           <span className="navbar-logo">GeoState</span>
         </div>
         

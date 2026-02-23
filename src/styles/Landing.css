@@ -1,12 +1,12 @@
 /* Landing Page */
 .landing-page {
   min-height: 100vh;
-  background: white;
+  background: #f1f1f1;
 }
 
 /* Navbar */
 .landing-navbar {
-  background: white;
+  background: #f1f1f1;
   border-bottom: 1px solid #e1e1e1;
   position: sticky;
   top: 0;
@@ -85,7 +85,7 @@
 
 .signin-button {
   padding: 10px 24px;
-  background: white;
+  background: #f1f1f1;
   border: 1px solid #0066ff;
   border-radius: 8px;
   color: #0066ff;
@@ -132,7 +132,7 @@
 .hero-title {
   font-size: 56px;
   font-weight: 700;
-  color: white;
+  color: #f1f1f1;
   margin: 0 0 40px 0;
   line-height: 1.2;
   text-shadow: 0 2px 8px rgba(0,0,0,0.3);
@@ -169,7 +169,7 @@
   padding: 20px 28px;
   background: #0066ff;
   border: none;
-  color: white;
+  color: #f1f1f1;
   cursor: pointer;
   transition: background 0.2s ease;
   display: flex;
@@ -184,7 +184,7 @@
 /* Recommendations Section */
 .recommendations-section {
   padding: 80px 24px;
-  background: white;
+  background: #f1f1f1;
 }
 
 .recommendations-content {
@@ -216,7 +216,7 @@
 
 .recommendations-signin-button {
   padding: 14px 32px;
-  background: white;
+  background: #f1f1f1;
   border: 2px solid #0066ff;
   border-radius: 8px;
   color: #0066ff;
@@ -315,7 +315,7 @@
 /* Services Section */
 .services-section {
   padding: 80px 24px;
-  background: #f7f7f7;
+  background: #f1f1f1;
 }
 
 .services-grid {
@@ -400,7 +400,7 @@
 
 /* Footer */
 .landing-footer {
-  background: #f7f7f7;
+  background: #f1f1f1;
   border-top: 1px solid #e1e1e1;
   padding: 60px 24px 24px;
 }
