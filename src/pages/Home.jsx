@@ -6,13 +6,8 @@ import PropertyCard from "../components/Property_Card";
 import { Search, SlidersHorizontal, Home as HomeIcon } from "lucide-react";
 import axios from "axios";
 import "../styles/Home.css";
-import { useAuth } from "../context/AuthContext";
-import { useNavigate } from "react-router-dom";
 
 function Home() {
-  const { token } = useAuth();
-  const navigate = useNavigate();
-
 
   const location = useLocation();
   const [properties, setProperties] = useState([]);
@@ -24,13 +19,6 @@ function Home() {
   const [searchText, setSearchText] = useState("");
 
   const cardRefs = useRef({});
-
-  // 🔒 Protect route
-  useEffect(() => {
-    if (!token) {
-      navigate("/login");
-    }
-  }, [token, navigate]);
 
   // Handle URL search parameters
   useEffect(() => {

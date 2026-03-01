@@ -54,35 +54,60 @@
 import React from 'react';
 import { useNavigate } from 'react-router-dom';
 import { useAuth } from '../context/AuthContext';
-import { LogOut, User, Home} from 'lucide-react';
+import { LogOut, LogIn, User, Home } from 'lucide-react';  // ← Added LogIn
 import '../styles/Navbar.css';
 
 const Navbar = () => {
-  const { user, logout } = useAuth();
+  const { user, logout, isAuthenticated } = useAuth();
   const navigate = useNavigate();
 
   const handleLogout = () => {
     logout();
-    navigate('/login');
+    navigate('/landing');
+  };
+
+  const handleLogin = () => {
+  navigate('/login');
   };
 
   return (
     <nav className="navbar">
       <div className="navbar-container">
         <div className="navbar-brand">
-          <Home className="navbar-logo-icon" onClick={() => navigate('/landing')}/>
+          <Home className="navbar-logo-icon" onClick={() => navigate('/landing')} />
           <span className="navbar-logo">GeoState</span>
         </div>
         
         <div className="navbar-user">
-          <div className="user-info">
-            <User className="user-icon" />
-            <span className="user-name">{user?.name}</span>
-          </div>
-          <button className="logout-button" onClick={handleLogout} style={{borderRadius: "4px", padding: "6px 12px"}}>
-            <LogOut size={20} style={{ color: "black" }}/>
-            <span style={{ color: "black" }}>Logout</span>
-          </button>
+          {isAuthenticated ? (
+            <>
+              {/* Logged In - Show User Info + Logout */}
+              <div className="user-info">
+                <User className="user-icon" />
+                <span className="user-name">{user?.name}</span>
+              </div>
+              <button 
+                className="logout-button" 
+                onClick={handleLogout} 
+                style={{ borderRadius: "4px", padding: "6px 12px" }}
+              >
+                <LogOut size={20} style={{ color: "black" }} />
+                <span style={{ color: "black" }}>Logout</span>
+              </button>
+            </>
+          ) : (
+            <>
+              {/* Not Logged In - Show Login Button */}
+              <button 
+                className="login-button" 
+                onClick={handleLogin} 
+                style={{ borderRadius: "4px", padding: "6px 12px" }}
+              >
+                <LogIn size={20} style={{ color: "black" }} />
+                <span style={{ color: "black" }}>Login</span>
+              </button>
+            </>
+          )}
         </div>
       </div>
     </nav>

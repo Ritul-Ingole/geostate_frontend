@@ -1,0 +1,288 @@
+.auth-slider {
+  position: relative;
+  width: 80%;
+  height: 80%;
+  background: #fff;
+  border-radius: 20px;
+  overflow: hidden;
+  box-shadow: 0 30px 60px rgba(0,0,0,0.15);
+  display: flex;
+}
+
+.forms {
+  display: flex;
+  width: 100%;
+}
+
+.signin-form {
+  width: 65%;
+  padding: 50px;
+  transition: 0.7s ease;
+}
+
+.building-icon-container-container{
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 75%;
+}
+
+.building-icon-container {
+  display: inline-block;
+  width: fit-content;
+  align-items:center;
+  justify-content: center;
+  background-color:#2664eb;
+  border-radius: 50%;
+  padding: 1%;
+}
+
+.signin-form h2 {
+  font-size: 38px;
+  margin: 2%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding-right: 25%;
+
+}
+
+.signin-form p {
+  color: #666;
+  margin-bottom: 2%;
+  margin-top: 2%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding-right: 25%;
+}
+
+.signup-form {
+  width: 38%;
+  padding: 60px;
+  transition: 0.7s ease;
+}
+
+.form h2 {
+  font-size: 28px;
+  margin-bottom: 8px;
+}
+
+.form p {
+  color: #666;
+  margin-bottom: 24px;
+}
+
+.signin-field-container{
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  width: 75%;
+  height: 40%;
+}
+
+.signin-field-container p{
+  align-self: flex-start;
+  margin-left: 15%;
+  color: black;
+  font-family: 'Inter', sans-serif;
+}
+
+.signin-field {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  border: 1px solid #ddd;
+  padding: 12px;
+  border-radius: 10px;
+  margin-bottom: 16px;
+  width: 70%;
+}
+
+.signin-field input {
+  border: none;
+  outline: none;
+  flex: 1;
+}
+
+.signup-field {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  border: 1px solid #ddd;
+  padding: 12px;
+  border-radius: 10px;
+  margin-bottom: 16px;
+  width: 94%;
+}
+
+.signup-field input {
+  border: none;
+  outline: none;
+  flex: 1;
+}
+
+.signin-primary-btn-container{
+  display:flex;
+  align-items: center;
+  justify-content: center;
+  width: 75%;
+}
+
+.signin-primary-btn {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 171px;
+  height: 44px;
+  background: #16a34a;
+  color: #fff;
+  border: none;
+  border-radius: 10px;
+  cursor: pointer;
+  font-size: 15px;
+}
+
+.signup-primary-btn {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 50%;
+  height: 44px;
+  background: #16a34a;
+  color: #fff;
+  border: none;
+  border-radius: 10px;
+  cursor: pointer;
+  font-size: 15px;
+}
+
+.sign-in.hide-left {
+  opacity: 0;
+  transform: translateX(-100%);
+  pointer-events: none;
+}
+
+.sign-up {
+  position: absolute;
+  right: 0;
+  opacity: 0;
+  transform: translateX(100%);
+  pointer-events: none;
+}
+
+.sign-up.show-right {
+  opacity: 1;
+  transform: translateX(0);
+  pointer-events: all;
+}
+
+.overlay {
+  position: absolute;
+  top: 0;
+  right: 0;
+  width: 50%;
+  height: 100%;
+  background-color: #16a34a;
+  /* background-image: url("../assets/bg-auth.png"); */
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  /* 🔑 animation */
+  transform: translateX(0%);
+  transition: transform 0.7s ease-in-out;
+
+  border-radius: 0 20px 20px 0;
+  overflow: hidden;
+}
+
+.overlay::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+
+  background: inherit; /* reuse same image */
+  filter: blur(3px);
+  transform: scale(1.1); /* prevents edge cut */
+
+  z-index: 0;
+}
+
+/* when signup is ACTIVE → move green panel LEFT */
+.overlay.left {
+  transform: translateX(-100%);
+  border-radius: 20px 0 0 20px;
+}
+
+/* default → green panel on RIGHT */
+.overlay.right {
+  transform: translateX(0%);
+}
+
+.lottie-wrapper {
+  width: 260px;
+  margin: 0 auto 20px;
+}
+
+.auth-lottie {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  z-index: 1;
+  pointer-events: none;
+}
+
+.overlay-content {
+  position: relative;
+  z-index: 2;
+  text-align: center;
+  max-width: 280px;
+}
+
+.overlay-content button {
+  margin-top: 20px;
+  padding: 10px 26px;
+  background: transparent;
+  border: 2px solid #fff;
+  color: #fff;
+  border-radius: 20px;
+  cursor: pointer;
+}
+
+.mobile-switch {
+  display: none;
+}
+
+@media (max-width: 768px) {
+  .auth-slider {
+    width: 100%;
+    height: auto;
+    flex-direction: column;
+  }
+
+  .overlay {
+    display: none;
+  }
+
+  .form {
+    width: 100%;
+  }
+
+  .mobile-switch {
+    display: block;
+    margin-top: 16px;
+  }
+
+  .mobile-switch span {
+    color: #16a34a;
+    cursor: pointer;
+    font-weight: 600;
+  }
+}

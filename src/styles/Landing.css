@@ -150,6 +150,7 @@
   display: flex;
   align-items: center;
   overflow: hidden;
+  width: 480px;
 }
 
 .hero-search-input {

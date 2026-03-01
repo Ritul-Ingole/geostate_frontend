@@ -24,17 +24,10 @@ function App() {
           <Route path="/login" element={<Login />} />
           <Route path="/register" element={<Register />} />
 
-          {/* Home - protected */}
-          <Route
-            path="/home"
-            element={
-              <ProtectedRoute>
-                <Home />
-              </ProtectedRoute>
-            }
-          />
+          {/* Home is now PUBLIC */}
+          <Route path="/home" element={<Home />} />
 
-          {/* Property details - protected */}
+          {/* Only PropertyDetails requires login */}
           <Route
             path="/property/:id"
             element={
