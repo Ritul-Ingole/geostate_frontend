@@ -20,7 +20,7 @@ const ImageCarousel = ({ images = [] }) => {
   return (
     <div style={{ position: "relative", marginBottom: "24px" }}>
       <img
-        src={`http://localhost:8000${images[index]}`}
+        src={images[index]}
         alt="property"
         style={{
           width: "100%",

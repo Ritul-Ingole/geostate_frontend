@@ -17,6 +17,10 @@ const Navbar = () => {
   navigate('/login');
   };
 
+  const handleLogoClick = () => {
+    navigate('/landing');
+  };
+
   return (
     <nav className="navbar">
       <div className="navbar-container">
