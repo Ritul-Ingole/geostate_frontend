@@ -203,6 +203,7 @@
   align-items: center;
   justify-content: center;
   overflow: hidden;
+  padding-top: 80px; /* offset for fixed navbar */
 }
 
 /* Layered overlay — warm, not flat black */
@@ -228,8 +229,14 @@
   position: relative;
   z-index: 2;
   text-align: center;
-  max-width: 780px;
+  width: 100%;
+  max-width: 680px;
   padding: 0 24px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 28px;
+  height: 35rem;
 }
 
 .hero-eyebrow {
@@ -238,21 +245,22 @@
   letter-spacing: 2.5px;
   text-transform: uppercase;
   color: rgba(255,255,255,0.55);
-  margin-bottom: 20px;
+  margin: 0;
   animation: fadeUp 0.6s 0.1s cubic-bezier(0.22,1,0.36,1) both;
 }
 
 .hero-title {
   font-family: 'Cormorant Garamond', serif;
-  font-size: clamp(52px, 8vw, 88px);
+  font-size: clamp(48px, 7vw, 80px);
   font-weight: 500;
   color: #fff;
   line-height: 1.05;
-  margin-bottom: 44px;
+  margin: 0;
   display: flex;
   flex-wrap: wrap;
   justify-content: center;
-  gap: 0 16px;
+  gap: 0 14px;
+  width: 100%;
 }
 
 .hero-word {
@@ -262,8 +270,8 @@
 }
 
 @keyframes wordReveal {
-  from { opacity: 0; transform: translateY(30px) skewY(2deg); }
-  to   { opacity: 1; transform: translateY(0) skewY(0deg); }
+  from { opacity: 0; transform: translateY(16px); }
+  to   { opacity: 1; transform: translateY(0); }
 }
 
 @keyframes fadeUp {
@@ -273,6 +281,8 @@
 
 /* Search */
 .hero-search-form {
+  width: 100%;
+  margin-top: 35%;
   animation: fadeUp 0.6s 0.72s cubic-bezier(0.22,1,0.36,1) both;
 }
 
@@ -280,6 +290,7 @@
   position: relative;
   display: flex;
   align-items: center;
+  width: 100%;
   background: rgba(255,255,255,0.97);
   border-radius: 50px;
   box-shadow: 0 16px 56px rgba(0,0,0,0.25), 0 0 0 1px rgba(255,255,255,0.1);
@@ -318,7 +329,7 @@
 .hero-search-button {
   margin: 6px;
   padding: 12px 24px;
-  background: var(--accent);
+  background: #c0392b;
   border: none;
   border-radius: 50px;
   color: #fff;
@@ -335,7 +346,7 @@
 }
 
 .hero-search-button:hover {
-  background: var(--accent-hover);
+  background: #96281b;
   transform: scale(1.03);
 }
 
