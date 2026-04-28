@@ -6,6 +6,7 @@ import Register from "./pages/Register";
 import PropertyDetails from "./pages/PropertyDetails";
 import Landing from './pages/Landing';
 import Intro from './pages/Intro';
+import Sell from './pages/Sell';
 import { AuthProvider } from './context/AuthContext';
 import ProtectedRoute from './components/ProtectedRoute';
 import "./styles/App.css";
@@ -13,33 +14,36 @@ import "./styles/App.css";
 function App() {
   return (
     <AuthProvider>
-        <Routes>
-          {/* Intro animation - default entry point */}
-          <Route path="/" element={<Intro />} />
+      <Routes>
+        {/* Intro animation - default entry point */}
+        <Route path="/" element={<Intro />} />
 
-          {/* Landing page - shown after intro */}
-          <Route path="/landing" element={<Landing />} />
+        {/* Landing page - shown after intro */}
+        <Route path="/landing" element={<Landing />} />
 
-          {/* Auth pages - public */}
-          <Route path="/login" element={<Login />} />
-          <Route path="/register" element={<Register />} />
+        {/* Auth pages - public */}
+        <Route path="/login" element={<Login />} />
+        <Route path="/register" element={<Register />} />
 
-          {/* Home is now PUBLIC */}
-          <Route path="/home" element={<Home />} />
+        {/* Home is now PUBLIC */}
+        <Route path="/home" element={<Home />} />
 
-          {/* Only PropertyDetails requires login */}
-          <Route
-            path="/property/:id"
-            element={
-              <ProtectedRoute>
-                <PropertyDetails />
-              </ProtectedRoute>
-            }
-          />
+        {/* Sell page - protected */}
+        <Route path="/sell" element={<Sell />} />
 
-          {/* Catch all → Landing */}
-          <Route path="*" element={<Navigate to="/" replace />} />
-        </Routes>
+        {/* Only PropertyDetails requires login */}
+        <Route
+          path="/property/:id"
+          element={
+            <ProtectedRoute>
+              <PropertyDetails />
+            </ProtectedRoute>
+          }
+        />
+
+        {/* Catch all → Landing */}
+        <Route path="*" element={<Navigate to="/" replace />} />
+      </Routes>
 
     </AuthProvider>
   );
