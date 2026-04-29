@@ -1,0 +1,655 @@
+/* ─────────────────────────────────────────────
+   GeoState — Mortgage Calculator Page
+   ───────────────────────────────────────────── */
+
+@import url('https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;1,400;1,500&family=DM+Sans:opsz,wght@9..40,300;9..40,400;9..40,500;9..40,600&display=swap');
+
+:root {
+  --bg:             #f5f1eb;
+  --surface:        #faf8f4;
+  --surface-raised: #ffffff;
+  --accent:         #1b5e3b;
+  --accent-dim:     #e6f0ea;
+  --accent-hover:   #154d30;
+  --terracotta:     #b85c38;
+  --text-primary:   #1c1c1a;
+  --text-secondary: #6a6860;
+  --text-muted:     #a09d98;
+  --border:         #e0dbd3;
+  --shadow-sm:      0 1px 4px rgba(28,28,26,.06);
+  --shadow-md:      0 4px 20px rgba(28,28,26,.10);
+  --shadow-lg:      0 12px 48px rgba(28,28,26,.16);
+  --transition:     0.22s cubic-bezier(0.4,0,0.2,1);
+  --radius:         14px;
+}
+
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+.mort-page {
+  min-height: 100vh;
+  background: var(--bg);
+  font-family: 'DM Sans', sans-serif;
+  color: var(--text-primary);
+}
+
+/* ── Navbar ── */
+.mort-nav {
+  background: var(--surface);
+  border-bottom: 1px solid var(--border);
+  position: sticky;
+  top: 0;
+  z-index: 50;
+  box-shadow: var(--shadow-sm);
+}
+
+.mort-nav-inner {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 14px 28px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.mort-logo {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  font-family: 'Cormorant Garamond', serif;
+  font-size: 20px;
+  font-weight: 600;
+  color: var(--accent);
+  cursor: pointer;
+}
+
+.mort-back {
+  background: none;
+  border: none;
+  font-size: 13.5px;
+  font-family: 'DM Sans', sans-serif;
+  color: var(--text-secondary);
+  cursor: pointer;
+  transition: color var(--transition);
+}
+
+.mort-back:hover { color: var(--accent); }
+
+/* ── Hero ── */
+.mort-hero {
+  background: var(--surface);
+  border-bottom: 1px solid var(--border);
+  padding: 52px 28px 44px;
+}
+
+.mort-hero-inner {
+  max-width: 1200px;
+  margin: 0 auto;
+}
+
+.mort-eyebrow {
+  font-size: 11px;
+  font-weight: 600;
+  letter-spacing: 2.5px;
+  text-transform: uppercase;
+  color: var(--terracotta);
+  margin-bottom: 14px;
+  animation: fadeUp .5s ease both;
+}
+
+.mort-title {
+  font-family: 'Cormorant Garamond', serif;
+  font-size: clamp(40px, 5vw, 64px);
+  font-weight: 500;
+  color: var(--text-primary);
+  line-height: 1.05;
+  margin-bottom: 16px;
+  animation: fadeUp .55s .05s ease both;
+}
+
+.mort-title em {
+  font-style: italic;
+  color: var(--accent);
+}
+
+.mort-subtitle {
+  font-size: 15px;
+  color: var(--text-secondary);
+  line-height: 1.7;
+  max-width: 520px;
+  animation: fadeUp .55s .1s ease both;
+}
+
+@keyframes fadeUp {
+  from { opacity: 0; transform: translateY(12px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+
+/* ── Bank rates strip ── */
+.mort-rates-strip {
+  background: var(--text-primary);
+  padding: 12px 28px;
+  display: flex;
+  align-items: center;
+  gap: 20px;
+  overflow-x: auto;
+}
+
+.rates-label {
+  font-size: 11px;
+  font-weight: 600;
+  color: rgba(255,255,255,0.45);
+  text-transform: uppercase;
+  letter-spacing: 1px;
+  white-space: nowrap;
+  flex-shrink: 0;
+}
+
+.rates-scroll {
+  display: flex;
+  gap: 6px;
+  flex: 1;
+  overflow-x: auto;
+}
+
+.rate-pill {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  background: rgba(255,255,255,0.07);
+  border: 1px solid rgba(255,255,255,0.10);
+  border-radius: 50px;
+  padding: 5px 14px;
+  white-space: nowrap;
+  flex-shrink: 0;
+}
+
+.rate-bank {
+  font-size: 12px;
+  color: rgba(255,255,255,0.70);
+  font-weight: 500;
+}
+
+.rate-val {
+  font-size: 12px;
+  font-weight: 700;
+}
+
+.rates-disclaimer {
+  font-size: 10px;
+  color: rgba(255,255,255,0.3);
+  white-space: nowrap;
+  flex-shrink: 0;
+}
+
+/* ── Body ── */
+.mort-body {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 36px 28px 80px;
+}
+
+/* ── Tabs ── */
+.mort-tabs {
+  display: flex;
+  gap: 6px;
+  margin-bottom: 28px;
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: 12px;
+  padding: 5px;
+  width: fit-content;
+}
+
+.mort-tab {
+  display: flex;
+  align-items: center;
+  gap: 7px;
+  padding: 9px 20px;
+  border: none;
+  border-radius: 8px;
+  background: transparent;
+  font-size: 13.5px;
+  font-family: 'DM Sans', sans-serif;
+  font-weight: 500;
+  color: var(--text-secondary);
+  cursor: pointer;
+  transition: all var(--transition);
+  white-space: nowrap;
+}
+
+.mort-tab:hover { color: var(--accent); }
+
+.mort-tab.active {
+  background: var(--surface-raised);
+  color: var(--accent);
+  font-weight: 600;
+  box-shadow: var(--shadow-sm);
+}
+
+/* ── Panel ── */
+.mort-panel {
+  animation: fadeUp .3s ease both;
+}
+
+.mort-grid-2 {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 20px;
+  margin-bottom: 20px;
+}
+
+/* ── Cards ── */
+.mort-card {
+  background: var(--surface-raised);
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  padding: 28px;
+  box-shadow: var(--shadow-sm);
+}
+
+.result-card {
+  background: var(--surface);
+}
+
+.card-title {
+  font-family: 'Cormorant Garamond', serif;
+  font-size: 22px;
+  font-weight: 600;
+  color: var(--text-primary);
+  margin-bottom: 24px;
+}
+
+/* ── Slider field ── */
+.slider-field {
+  margin-bottom: 24px;
+}
+
+.slider-top {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 10px;
+}
+
+.slider-top label {
+  font-size: 12px;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.6px;
+  color: var(--text-secondary);
+}
+
+.slider-val {
+  font-size: 15px;
+  font-weight: 700;
+  color: var(--accent);
+  font-family: 'Cormorant Garamond', serif;
+}
+
+.slider-track {
+  position: relative;
+  height: 6px;
+  background: var(--border);
+  border-radius: 99px;
+}
+
+.slider-fill {
+  position: absolute;
+  left: 0;
+  top: 0;
+  height: 100%;
+  background: var(--accent);
+  border-radius: 99px;
+  pointer-events: none;
+  transition: width .1s ease;
+}
+
+.slider-track input[type=range] {
+  position: absolute;
+  top: 50%;
+  left: 0;
+  width: 100%;
+  transform: translateY(-50%);
+  appearance: none;
+  -webkit-appearance: none;
+  background: transparent;
+  cursor: pointer;
+  height: 20px;
+}
+
+.slider-track input[type=range]::-webkit-slider-thumb {
+  -webkit-appearance: none;
+  width: 18px;
+  height: 18px;
+  border-radius: 50%;
+  background: var(--surface-raised);
+  border: 2.5px solid var(--accent);
+  box-shadow: 0 2px 8px rgba(27,94,59,.25);
+  transition: transform var(--transition);
+}
+
+.slider-track input[type=range]::-webkit-slider-thumb:hover {
+  transform: scale(1.2);
+}
+
+/* ── Number field ── */
+.form-field {
+  margin-bottom: 20px;
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+
+.form-field label {
+  font-size: 12px;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.6px;
+  color: var(--text-secondary);
+}
+
+.form-field input {
+  padding: 10px 14px;
+  border: 1.5px solid var(--border);
+  border-radius: 8px;
+  font-size: 14px;
+  font-family: 'DM Sans', sans-serif;
+  background: var(--bg);
+  color: var(--text-primary);
+  outline: none;
+  transition: border-color var(--transition), box-shadow var(--transition);
+}
+
+.form-field input:focus {
+  border-color: var(--accent);
+  box-shadow: 0 0 0 3px rgba(27,94,59,.10);
+}
+
+/* ── EMI result ── */
+.emi-big {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+  margin-bottom: 24px;
+}
+
+.emi-label {
+  font-size: 11px;
+  font-weight: 600;
+  letter-spacing: 1px;
+  text-transform: uppercase;
+  color: var(--text-muted);
+}
+
+.emi-amount {
+  font-family: 'Cormorant Garamond', serif;
+  font-size: clamp(32px, 4vw, 44px);
+  font-weight: 600;
+  color: var(--accent);
+  line-height: 1;
+}
+
+/* Breakdown bar */
+.breakdown-bar {
+  display: flex;
+  height: 10px;
+  border-radius: 99px;
+  overflow: hidden;
+  margin-bottom: 10px;
+}
+
+.bar-principal { background: var(--accent); }
+.bar-interest  { background: var(--terracotta); }
+
+.bar-legend {
+  display: flex;
+  gap: 16px;
+  font-size: 12.5px;
+  color: var(--text-secondary);
+  margin-bottom: 24px;
+}
+
+.dot {
+  display: inline-block;
+  width: 10px;
+  height: 10px;
+  border-radius: 50%;
+  margin-right: 5px;
+}
+
+.principal-dot { background: var(--accent); }
+.interest-dot  { background: var(--terracotta); }
+
+/* Summary rows */
+.emi-summary {
+  border-top: 1px solid var(--border);
+  padding-top: 18px;
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.summary-row-item {
+  display: flex;
+  justify-content: space-between;
+  font-size: 14px;
+  color: var(--text-secondary);
+}
+
+.summary-row-item strong { color: var(--text-primary); }
+.summary-row-item.total-row {
+  padding-top: 12px;
+  border-top: 1px solid var(--border);
+  font-weight: 600;
+  color: var(--text-primary);
+}
+
+.summary-row-item.total-row strong {
+  font-size: 16px;
+  color: var(--accent);
+}
+
+/* ── Info tip ── */
+.info-tip {
+  display: flex;
+  align-items: flex-start;
+  gap: 8px;
+  background: var(--accent-dim);
+  border-radius: 8px;
+  padding: 11px 13px;
+  font-size: 13px;
+  color: var(--accent);
+  margin-bottom: 20px;
+  line-height: 1.5;
+}
+
+.info-tip svg { flex-shrink: 0; margin-top: 1px; }
+
+.elig-note {
+  margin-top: 20px;
+  font-size: 12px;
+  color: var(--text-muted);
+  line-height: 1.6;
+  font-style: italic;
+}
+
+/* ── Compare ── */
+.compare-result {
+  border-top: 1px solid var(--border);
+  margin-top: 20px;
+  padding-top: 18px;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.compare-stat {
+  display: flex;
+  justify-content: space-between;
+  font-size: 14px;
+  color: var(--text-secondary);
+}
+
+.compare-stat strong { color: var(--text-primary); }
+
+.winner-banner {
+  background: var(--accent-dim);
+  border: 1px solid rgba(27,94,59,.2);
+  border-radius: var(--radius);
+  padding: 16px 20px;
+  font-size: 14.5px;
+  color: var(--accent);
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.winner-tag {
+  background: var(--accent);
+  color: #fff;
+  font-size: 11px;
+  font-weight: 700;
+  padding: 3px 10px;
+  border-radius: 50px;
+  white-space: nowrap;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+}
+
+/* ── Amortization ── */
+.sched-header { margin-bottom: 24px; }
+.sched-note {
+  font-size: 13px;
+  color: var(--text-muted);
+  margin-top: 6px;
+}
+
+.year-summary {
+  display: flex;
+  gap: 8px;
+  flex-wrap: wrap;
+  margin-bottom: 24px;
+}
+
+.year-card {
+  background: var(--bg);
+  border: 1px solid var(--border);
+  border-radius: 8px;
+  padding: 10px 14px;
+  display: flex;
+  flex-direction: column;
+  gap: 3px;
+  min-width: 80px;
+}
+
+.year-label {
+  font-size: 10px;
+  font-weight: 700;
+  text-transform: uppercase;
+  color: var(--text-muted);
+  letter-spacing: 0.5px;
+}
+
+.year-principal {
+  font-size: 12px;
+  font-weight: 600;
+  color: var(--accent);
+}
+
+.year-interest {
+  font-size: 11px;
+  color: var(--terracotta);
+}
+
+.sched-table-wrap {
+  overflow-x: auto;
+  border: 1px solid var(--border);
+  border-radius: 10px;
+}
+
+.sched-table {
+  width: 100%;
+  border-collapse: collapse;
+  font-size: 13.5px;
+}
+
+.sched-table thead {
+  background: var(--bg);
+  position: sticky;
+  top: 0;
+}
+
+.sched-table th {
+  padding: 12px 16px;
+  text-align: right;
+  font-size: 11px;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.6px;
+  color: var(--text-muted);
+  border-bottom: 1px solid var(--border);
+}
+
+.sched-table th:first-child { text-align: left; }
+
+.sched-table td {
+  padding: 11px 16px;
+  text-align: right;
+  color: var(--text-secondary);
+  border-bottom: 1px solid var(--border);
+  transition: background var(--transition);
+}
+
+.sched-table td:first-child { text-align: left; font-weight: 600; color: var(--text-primary); }
+
+.sched-table tr:last-child td { border-bottom: none; }
+.sched-table tr:hover td { background: var(--bg); }
+
+.expand-btn {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  margin: 16px auto 0;
+  background: none;
+  border: 1.5px solid var(--border);
+  border-radius: 50px;
+  padding: 9px 22px;
+  font-size: 13.5px;
+  font-family: 'DM Sans', sans-serif;
+  font-weight: 500;
+  color: var(--text-secondary);
+  cursor: pointer;
+  transition: all var(--transition);
+}
+
+.expand-btn:hover {
+  border-color: var(--accent);
+  color: var(--accent);
+}
+
+/* ── Utility ── */
+.green { color: var(--accent) !important; }
+.red   { color: var(--terracotta) !important; }
+
+.empty-msg {
+  font-size: 14px;
+  color: var(--text-muted);
+  font-style: italic;
+  padding: 20px 0;
+}
+
+/* ── Responsive ── */
+@media (max-width: 768px) {
+  .mort-grid-2 { grid-template-columns: 1fr; }
+  .mort-tabs { width: 100%; overflow-x: auto; }
+  .mort-tab span { display: none; }
+  .mort-hero { padding: 36px 20px 32px; }
+  .mort-body { padding: 24px 16px 60px; }
+  .mort-rates-strip { padding: 10px 16px; }
+  .year-summary { gap: 6px; }
+}
+
+@media (max-width: 480px) {
+  .mort-tab { padding: 9px 14px; }
+  .mort-card { padding: 20px; }
+}

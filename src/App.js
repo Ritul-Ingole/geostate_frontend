@@ -7,6 +7,7 @@ import PropertyDetails from "./pages/PropertyDetails";
 import Landing from './pages/Landing';
 import Intro from './pages/Intro';
 import Sell from './pages/Sell';
+import Mortgage from './pages/Mortgage';
 import { AuthProvider } from './context/AuthContext';
 import ProtectedRoute from './components/ProtectedRoute';
 import "./styles/App.css";
@@ -30,6 +31,8 @@ function App() {
 
         {/* Sell page - protected */}
         <Route path="/sell" element={<Sell />} />
+        {/* Mortgage calculator - protected */}
+        <Route path="/mortgage" element={<Mortgage />} />
 
         {/* Only PropertyDetails requires login */}
         <Route
