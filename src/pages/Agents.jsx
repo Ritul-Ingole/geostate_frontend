@@ -4,7 +4,7 @@ import {
   Building2, MapPin, Star, Home, Phone, MessageCircle,
   Search, SlidersHorizontal, X, Award, Clock, Languages
 } from 'lucide-react';
-//import '../styles/Agents.css';
+import '../styles/Agents.css';
 
 /* ── Hardcoded agent data ── */
 const AGENTS = [
@@ -149,7 +149,7 @@ const AGENTS = [
     listings: 44,
     experience: 10,
     languages: ['Hindi', 'English', 'Punjabi'],
-    bio: 'Top-rated seller agent in Aundh and Pashan. Gets your listing maximum eyeballs in minimum time.',
+    bio: 'Top-rated sellers agent in Aundh and Pashan. Gets your listing maximum eyeballs in minimum time.',
   },
   {
     id: 12,
@@ -344,7 +344,7 @@ const Agents = () => {
       {/* ── Page Header ── */}
       <div className="agents-hero">
         <div className="agents-hero-content">
-          <div className="section-eyebrow">Our Network</div>
+          <br></br>
           <h1 className="agents-hero-title">Find the right agent for you</h1>
           <p className="agents-hero-sub">
             Browse verified agents across India's top cities — filter by city, specialty, and rating.

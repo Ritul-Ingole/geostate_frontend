@@ -312,7 +312,12 @@ const Landing = () => {
       </section>
 
       {/* ── Footer ── */}
-      <footer className="landing-footer">
+      <footer className="landing-footer" style={{ position: 'relative', overflow: 'hidden' }}>
+
+        {/* Floating icons — behind all content */}
+        <FloatingIcons />
+        
+        {/* Actual footer content — above icons */}
         <div className="footer-content">
           <div className="footer-section">
             <div className="footer-logo-mark">
