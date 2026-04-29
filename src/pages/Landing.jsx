@@ -1,7 +1,61 @@
 import React, { useState, useEffect } from 'react';
 import { useNavigate, Link } from 'react-router-dom';
-import { Search, Home, Key, TrendingUp, MapPin, ArrowRight, Building2 } from 'lucide-react';
+import { Search, Home, Key, TrendingUp, MapPin, ArrowRight, Building2, Ruler, FileText, Compass, IndianRupee } from 'lucide-react';
 import '../styles/Landing.css';
+
+/* ─────────────────────────────────────────
+   Floating Background Icons
+   Used in: Recommendations + Services sections
+───────────────────────────────────────── */
+const FLOAT_ICONS = [
+  // [Icon, size, top%, left%, animDuration, animDelay, animation]
+  { Icon: Home,       size: 78, top: '12%',  left: '2%',   dur: '7s',   delay: '0s',    anim: 'geoFloat' },
+  { Icon: MapPin,     size: 66, top: '65%',  left: '18%', dur: '9s',   delay: '1.2s',  anim: 'geoPulse' },
+  { Icon: Key,        size: 70, top: '35%',  left: '94%',  dur: '8s',   delay: '0.4s',  anim: 'geoFloat' },
+  { Icon: Building2,  size: 72, top: '72%',  left: '75%',  dur: '10s',  delay: '2s',    anim: 'geoPulse' },
+  { Icon: TrendingUp, size: 64, top: '8%',   left: '55%',  dur: '6.5s', delay: '1.8s',  anim: 'geoFloat' },
+  { Icon: Ruler,      size: 68, top: '50%',  left: '40%',  dur: '7.5s', delay: '0.8s',  anim: 'geoPulse' },
+  { Icon: FileText,   size: 62, top: '80%',  left: '30%',   dur: '8.5s', delay: '3s',    anim: 'geoFloat' },
+  { Icon: Compass,    size: 62, top: '25%',  left: '65%', dur: '11s',  delay: '1.5s',  anim: 'geoPulse' },
+  { Icon: IndianRupee, size: 60, top: '90%',  left: '85%',  dur: '7s',   delay: '2.5s',  anim: 'geoFloat' },
+  { Icon: Home,       size: 68, top: '55%',  left: '50%',  dur: '9.5s', delay: '0.2s',  anim: 'geoPulse' },
+];
+
+const floatAnimStyles = `
+  @keyframes geoFloat {
+    0%   { transform: translateY(0px);    opacity: 0.13; }
+    50%  { transform: translateY(-18px);  opacity: 0.22; }
+    100% { transform: translateY(0px);    opacity: 0.13; }
+  }
+  @keyframes geoPulse {
+    0%   { transform: scale(1);    opacity: 0.10; }
+    50%  { transform: scale(1.12); opacity: 0.20; }
+    100% { transform: scale(1);    opacity: 0.10; }
+  }
+`;
+
+const FloatingIcons = () => (
+  <>
+    <style>{floatAnimStyles}</style>
+    {FLOAT_ICONS.map(({ Icon, size, top, left, dur, delay, anim }, i) => (
+      <div
+        key={i}
+        style={{
+          position: 'absolute',
+          top,
+          left,
+          zIndex: 0,
+          pointerEvents: 'none',
+          animation: `${anim} ${dur} ease-in-out ${delay} infinite`,
+          color: 'rgba(101, 78, 52, 0.55)',   /* warm brown to match cream bg */
+        }}
+      >
+        <Icon size={size} strokeWidth={1.2} />
+      </div>
+    ))}
+  </>
+);
+
 
 const Landing = () => {
   const [searchQuery, setSearchQuery] = useState('');
@@ -55,7 +109,20 @@ const Landing = () => {
               Sell
             </span>
             <Link to="/mortgage" className="nav-link">Mortgage</Link>
-            <Link to="/agents" className="nav-link">Find an agent</Link>
+            <span
+              className="nav-link"
+              onClick={() => {
+                const token = localStorage.getItem('token');
+                if (token) {
+                  navigate('/agents');
+                } else {
+                  navigate('/login', { state: { from: { pathname: '/agents' } } });
+                }
+              }}
+              style={{ cursor: 'pointer' }}
+            >
+              Find an Agent
+            </span>
           </div>
 
           <div className="landing-nav-actions">
@@ -129,7 +196,11 @@ const Landing = () => {
       </section>
 
       {/* ── Recommendations ── */}
-      <section className="recommendations-section">
+      <section className="recommendations-section" style={{ position: 'relative', overflow: 'hidden' }}>
+        {/* Floating icons — behind all content */}
+        <FloatingIcons />
+
+        {/* Actual section content — above icons */}
         <div className="recommendations-content">
           <div className="recommendations-left">
             <div className="section-eyebrow">Personalised for you</div>
@@ -181,7 +252,12 @@ const Landing = () => {
       </section>
 
       {/* ── Services ── */}
-      <section className="services-section">
+      <section className="services-section" style={{ position: 'relative', overflow: 'hidden' }}>
+
+        {/* Floating icons — behind all content */}
+        <FloatingIcons />
+
+        {/* Actual section content — above icons */}
         <div className="services-header">
           <div className="section-eyebrow">What we offer</div>
           <h2 className="services-section-title">Everything in one place</h2>
