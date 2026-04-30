@@ -198,6 +198,8 @@
   border-radius: 12px;
   padding: 5px;
   width: fit-content;
+  position: relative;  /* add this */
+  z-index: 2;
 }
 
 .mort-tab {
@@ -236,6 +238,8 @@
   grid-template-columns: 1fr 1fr;
   gap: 20px;
   margin-bottom: 20px;
+  position: relative;  /* add this */
+  z-index: 2;
 }
 
 /* ── Cards ── */
@@ -245,6 +249,8 @@
   border-radius: var(--radius);
   padding: 28px;
   box-shadow: var(--shadow-sm);
+  position: relative;  /* add this */
+  z-index: 2;
 }
 
 .result-card {

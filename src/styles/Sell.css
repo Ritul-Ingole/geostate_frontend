@@ -79,6 +79,8 @@
   max-width: 680px;
   margin: 0 auto;
   padding: 40px 24px 80px;
+  position: relative;  /* add this */
+  z-index: 1;
 }
 
 /* ── Progress ── */
@@ -158,6 +160,8 @@
   border-radius: 16px;
   padding: 40px;
   box-shadow: var(--shadow-md);
+  position: relative;  /* add this */
+  z-index: 2;
 }
 
 /* ── Form Steps ── */

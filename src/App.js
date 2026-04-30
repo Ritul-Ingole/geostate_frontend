@@ -9,6 +9,7 @@ import Intro from './pages/Intro';
 import Sell from './pages/Sell';
 import Mortgage from './pages/Mortgage';
 import Agents from './pages/Agents';
+import Help from './pages/Help';
 import { AuthProvider } from './context/AuthContext';
 import ProtectedRoute from './components/ProtectedRoute';
 import "./styles/App.css";
@@ -38,6 +39,9 @@ function App() {
 
         {/* Agents page - protected */}
         <Route path="/agents" element={<Agents />} />
+
+        {/* Help page */}
+        <Route path="/help" element={<Help />} />
 
         {/* Only PropertyDetails requires login */}
         <Route

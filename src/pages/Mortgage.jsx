@@ -1,7 +1,60 @@
 import { useState, useMemo } from 'react';
 import { useNavigate } from 'react-router-dom';
-import { Building2, Calculator, TrendingUp, GitCompare, Table, ChevronDown, ChevronUp, Info } from 'lucide-react';
+import { Building2, Calculator, TrendingUp, GitCompare, Table, ChevronDown, ChevronUp, Info, Home, MapPin, Key, Ruler, FileText, Compass, IndianRupee } from 'lucide-react';
 import '../styles/Mortgage.css';
+
+/* ─────────────────────────────────────────
+   Floating Background Icons
+   Used in: Recommendations + Services sections
+───────────────────────────────────────── */
+const FLOAT_ICONS = [
+  // [Icon, size, top%, left%, animDuration, animDelay, animation]
+  { Icon: Home,       size: 78, top: '12%',  left: '2%',   dur: '7s',   delay: '0s',    anim: 'geoFloat' },
+  { Icon: MapPin,     size: 66, top: '65%',  left: '18%', dur: '9s',   delay: '0s',  anim: 'geoPulse' },
+  { Icon: Key,        size: 70, top: '35%',  left: '94%',  dur: '8s',   delay: '0s',  anim: 'geoFloat' },
+  { Icon: Building2,  size: 72, top: '72%',  left: '75%',  dur: '10s',  delay: '0s',    anim: 'geoPulse' },
+  { Icon: TrendingUp, size: 64, top: '8%',   left: '55%',  dur: '6.5s', delay: '0s',  anim: 'geoFloat' },
+  { Icon: Ruler,      size: 68, top: '50%',  left: '40%',  dur: '7.5s', delay: '0s',  anim: 'geoPulse' },
+  { Icon: FileText,   size: 62, top: '80%',  left: '30%',   dur: '8.5s', delay: '0s',    anim: 'geoFloat' },
+  { Icon: Compass,    size: 62, top: '25%',  left: '65%', dur: '11s',  delay: '0s',  anim: 'geoPulse' },
+  { Icon: IndianRupee, size: 60, top: '90%',  left: '85%',  dur: '7s',   delay: '0s',  anim: 'geoFloat' },
+  { Icon: Home,       size: 68, top: '55%',  left: '50%',  dur: '9.5s', delay: '0s',  anim: 'geoPulse' },
+];
+
+const floatAnimStyles = `
+  @keyframes geoFloat {
+    0%   { transform: translateY(0px);    opacity: 0.13; }
+    50%  { transform: translateY(-18px);  opacity: 0.22; }
+    100% { transform: translateY(0px);    opacity: 0.13; }
+  }
+  @keyframes geoPulse {
+    0%   { transform: scale(1);    opacity: 0.10; }
+    50%  { transform: scale(1.12); opacity: 0.20; }
+    100% { transform: scale(1);    opacity: 0.10; }
+  }
+`;
+
+const FloatingIcons = () => (
+  <>
+    <style>{floatAnimStyles}</style>
+    {FLOAT_ICONS.map(({ Icon, size, top, left, dur, delay, anim }, i) => (
+      <div
+        key={i}
+        style={{
+          position: 'absolute',
+          top,
+          left,
+          zIndex: 0,
+          pointerEvents: 'none',
+          animation: `${anim} ${dur} ease-in-out ${delay} infinite`,
+          color: 'rgba(101, 78, 52, 0.55)',   /* warm brown to match cream bg */
+        }}
+      >
+        <Icon size={size} strokeWidth={1.2} />
+      </div>
+    ))}
+  </>
+);
 
 // ── Bank reference rates ──────────────────────────────
 const BANK_RATES = [
@@ -98,6 +151,8 @@ export default function Mortgage() {
 
   return (
     <div className="mort-page">
+      {/* Floating icons — behind all content */}
+        <FloatingIcons />
       {/* ── Navbar ── */}
       <nav className="mort-nav">
         <div className="mort-nav-inner">
@@ -155,6 +210,8 @@ export default function Mortgage() {
         {/* ══════ EMI CALCULATOR ══════ */}
         {tab === 'emi' && (
           <div className="mort-panel">
+            {/* Floating icons — behind all content */}
+            <FloatingIcons />
             <div className="mort-grid-2">
               {/* Inputs */}
               <div className="mort-card">
@@ -227,6 +284,8 @@ export default function Mortgage() {
         {/* ══════ ELIGIBILITY ══════ */}
         {tab === 'eligibility' && (
           <div className="mort-panel">
+            {/* Floating icons — behind all content */}
+            <FloatingIcons />
             <div className="mort-grid-2">
               <div className="mort-card">
                 <h3 className="card-title">Your Financial Profile</h3>
@@ -292,6 +351,8 @@ export default function Mortgage() {
         {/* ══════ COMPARE ══════ */}
         {tab === 'compare' && (
           <div className="mort-panel">
+            {/* Floating icons — behind all content */}
+            <FloatingIcons />
             <div className="mort-grid-2">
               {[
                 { loan: loanA, setLoan: setLoanA, label: 'Loan A' },
@@ -360,6 +421,8 @@ export default function Mortgage() {
         {/* ══════ AMORTIZATION ══════ */}
         {tab === 'schedule' && (
           <div className="mort-panel">
+            {/* Floating icons — behind all content */}
+            <FloatingIcons />
             <div className="mort-card">
               <div className="sched-header">
                 <h3 className="card-title">Repayment Schedule</h3>

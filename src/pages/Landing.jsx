@@ -10,15 +10,15 @@ import '../styles/Landing.css';
 const FLOAT_ICONS = [
   // [Icon, size, top%, left%, animDuration, animDelay, animation]
   { Icon: Home,       size: 78, top: '12%',  left: '2%',   dur: '7s',   delay: '0s',    anim: 'geoFloat' },
-  { Icon: MapPin,     size: 66, top: '65%',  left: '18%', dur: '9s',   delay: '1.2s',  anim: 'geoPulse' },
-  { Icon: Key,        size: 70, top: '35%',  left: '94%',  dur: '8s',   delay: '0.4s',  anim: 'geoFloat' },
-  { Icon: Building2,  size: 72, top: '72%',  left: '75%',  dur: '10s',  delay: '2s',    anim: 'geoPulse' },
-  { Icon: TrendingUp, size: 64, top: '8%',   left: '55%',  dur: '6.5s', delay: '1.8s',  anim: 'geoFloat' },
-  { Icon: Ruler,      size: 68, top: '50%',  left: '40%',  dur: '7.5s', delay: '0.8s',  anim: 'geoPulse' },
-  { Icon: FileText,   size: 62, top: '80%',  left: '30%',   dur: '8.5s', delay: '3s',    anim: 'geoFloat' },
-  { Icon: Compass,    size: 62, top: '25%',  left: '65%', dur: '11s',  delay: '1.5s',  anim: 'geoPulse' },
-  { Icon: IndianRupee, size: 60, top: '90%',  left: '85%',  dur: '7s',   delay: '2.5s',  anim: 'geoFloat' },
-  { Icon: Home,       size: 68, top: '55%',  left: '50%',  dur: '9.5s', delay: '0.2s',  anim: 'geoPulse' },
+  { Icon: MapPin,     size: 66, top: '65%',  left: '18%', dur: '9s',   delay: '0s',  anim: 'geoPulse' },
+  { Icon: Key,        size: 70, top: '35%',  left: '94%',  dur: '8s',   delay: '0s',  anim: 'geoFloat' },
+  { Icon: Building2,  size: 72, top: '72%',  left: '75%',  dur: '10s',  delay: '0s',    anim: 'geoPulse' },
+  { Icon: TrendingUp, size: 64, top: '8%',   left: '55%',  dur: '6.5s', delay: '0s',  anim: 'geoFloat' },
+  { Icon: Ruler,      size: 68, top: '50%',  left: '40%',  dur: '7.5s', delay: '0s',  anim: 'geoPulse' },
+  { Icon: FileText,   size: 62, top: '80%',  left: '30%',   dur: '8.5s', delay: '0s',    anim: 'geoFloat' },
+  { Icon: Compass,    size: 62, top: '25%',  left: '65%', dur: '11s',  delay: '0s',  anim: 'geoPulse' },
+  { Icon: IndianRupee, size: 60, top: '90%',  left: '85%',  dur: '7s',   delay: '0s',  anim: 'geoFloat' },
+  { Icon: Home,       size: 68, top: '55%',  left: '50%',  dur: '9.5s', delay: '0s',  anim: 'geoPulse' },
 ];
 
 const floatAnimStyles = `
@@ -126,8 +126,7 @@ const Landing = () => {
           </div>
 
           <div className="landing-nav-actions">
-            <a href="#" className="nav-action">Advertise</a>
-            <a href="#" className="nav-action">Help</a>
+            <a href="/help" className="nav-action">Help</a>
             <button className="signin-button" onClick={() => navigate('/login')}>
               Sign in
             </button>
@@ -197,6 +196,7 @@ const Landing = () => {
 
       {/* ── Recommendations ── */}
       <section className="recommendations-section" style={{ position: 'relative', overflow: 'hidden' }}>
+        
         {/* Floating icons — behind all content */}
         <FloatingIcons />
 
