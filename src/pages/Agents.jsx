@@ -310,34 +310,13 @@ const Agents = () => {
     <div className="agents-page">
 
       {/* ── Navbar ── */}
-      <nav className={`landing-navbar ${scrolled ? 'navbar-scrolled' : ''}`}>
-        <div className="landing-navbar-content">
-          <div className="landing-logo" onClick={() => navigate('/landing')} style={{ cursor: 'pointer' }}>
-            <Building2 size={28} className="logo-icon" />
-            <span className="logo-text">GeoState</span>
+      <nav className="agents-nav">
+        <div className="agents-nav-inner">
+          <div className="agents-logo" onClick={() => navigate('/landing')}>
+            <Building2 size={22} />
+            <span>GeoState</span>
           </div>
-          <div className="landing-nav-links">
-            <Link to="/home?purpose=buy"  className="nav-link">Buy</Link>
-            <Link to="/home?purpose=rent" className="nav-link">Rent</Link>
-            <span
-              className="nav-link"
-              style={{ cursor: 'pointer' }}
-              onClick={() => {
-                const token = localStorage.getItem('token');
-                if (token) navigate('/sell');
-                else navigate('/login', { state: { from: { pathname: '/sell' } } });
-              }}
-            >
-              Sell
-            </span>
-            <Link to="/mortgage" className="nav-link">Mortgage</Link>
-            <Link to="/agents"   className="nav-link nav-link-active">Find an agent</Link>
-          </div>
-          <div className="landing-nav-actions">
-            <a href="#" className="nav-action">Advertise</a>
-            <a href="#" className="nav-action">Help</a>
-            <button className="signin-button" onClick={() => navigate('/login')}>Sign in</button>
-          </div>
+          <button className="agents-back" onClick={() => navigate('/landing')}>← Back</button>
         </div>
       </nav>
 

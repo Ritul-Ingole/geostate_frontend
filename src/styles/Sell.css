@@ -32,43 +32,47 @@
   color: var(--text-primary);
 }
 
-/* ── Header ── */
-.sell-header {
+/* ── Navbar ── */
+.sell-nav {
   background: var(--surface);
   border-bottom: 1px solid var(--border);
   position: sticky;
   top: 0;
   z-index: 50;
+  box-shadow: var(--shadow-sm);
 }
 
-.sell-header-content {
-  max-width: 1000px;
+.sell-nav-inner {
+  max-width: 1200px;
   margin: 0 auto;
-  padding: 16px 24px;
+  padding: 14px 28px;
   display: flex;
   align-items: center;
   justify-content: space-between;
 }
 
-.back-btn {
+.sell-logo {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  font-family: 'Cormorant Garamond', serif;
+  font-size: 20px;
+  font-weight: 600;
+  color: var(--accent);
+  cursor: pointer;
+}
+
+.sell-back {
   background: none;
   border: none;
-  font-size: 14px;
+  font-size: 13.5px;
   font-family: 'DM Sans', sans-serif;
   color: var(--text-secondary);
   cursor: pointer;
   transition: color var(--transition);
 }
 
-.back-btn:hover { color: var(--accent); }
-
-.sell-logo {
-  font-family: 'Cormorant Garamond', serif;
-  font-size: 22px;
-  font-weight: 600;
-  color: var(--accent);
-  cursor: pointer;
-}
+.sell-back:hover { color: var(--accent); }
 
 /* ── Body ── */
 .sell-body {
