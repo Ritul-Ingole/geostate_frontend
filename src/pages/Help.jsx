@@ -3,9 +3,63 @@ import { useNavigate, Link } from 'react-router-dom';
 import {
   Building2, Search, Home, Tag, Users, CreditCard,
   ChevronDown, ChevronUp, Mail, Send, CheckCircle,
-  MessageSquare, AlertCircle, ArrowRight, X
+  MessageSquare, AlertCircle, ArrowRight, X, MapPin, Key, TrendingUp, Ruler, FileText, Compass, IndianRupee
 } from 'lucide-react';
 import '../styles/Help.css';
+
+/* ─────────────────────────────────────────
+   Floating Background Icons
+   Used in: Recommendations + Services sections
+───────────────────────────────────────── */
+const FLOAT_ICONS = [
+  // [Icon, size, top%, left%, animDuration, animDelay, animation]
+  { Icon: Home,       size: 78, top: '12%',  left: '2%',   dur: '7s',   delay: '0s',    anim: 'geoFloat' },
+  { Icon: MapPin,     size: 66, top: '65%',  left: '18%', dur: '9s',   delay: '0s',  anim: 'geoPulse' },
+  { Icon: Key,        size: 70, top: '35%',  left: '94%',  dur: '8s',   delay: '0s',  anim: 'geoFloat' },
+  { Icon: Building2,  size: 72, top: '72%',  left: '75%',  dur: '10s',  delay: '0s',    anim: 'geoPulse' },
+  { Icon: TrendingUp, size: 64, top: '8%',   left: '55%',  dur: '6.5s', delay: '0s',  anim: 'geoFloat' },
+  { Icon: Ruler,      size: 68, top: '50%',  left: '40%',  dur: '7.5s', delay: '0s',  anim: 'geoPulse' },
+  { Icon: FileText,   size: 62, top: '80%',  left: '30%',   dur: '8.5s', delay: '0s',    anim: 'geoFloat' },
+  { Icon: Compass,    size: 62, top: '25%',  left: '65%', dur: '11s',  delay: '0s',  anim: 'geoPulse' },
+  { Icon: IndianRupee, size: 60, top: '90%',  left: '85%',  dur: '7s',   delay: '0s',  anim: 'geoFloat' },
+  { Icon: Home,       size: 68, top: '55%',  left: '50%',  dur: '9.5s', delay: '0s',  anim: 'geoPulse' },
+];
+
+const floatAnimStyles = `
+  @keyframes geoFloat {
+    0%   { transform: translateY(0px);    opacity: 0.13; }
+    50%  { transform: translateY(-18px);  opacity: 0.22; }
+    100% { transform: translateY(0px);    opacity: 0.13; }
+  }
+  @keyframes geoPulse {
+    0%   { transform: scale(1);    opacity: 0.10; }
+    50%  { transform: scale(1.12); opacity: 0.20; }
+    100% { transform: scale(1);    opacity: 0.10; }
+  }
+`;
+
+const FloatingIcons = () => (
+  <>
+    <style>{floatAnimStyles}</style>
+    {FLOAT_ICONS.map(({ Icon, size, top, left, dur, delay, anim }, i) => (
+      <div
+        key={i}
+        style={{
+          position: 'absolute',
+          top,
+          left,
+          zIndex: 0,
+          pointerEvents: 'none',
+          animation: `${anim} ${dur} ease-in-out ${delay} infinite`,
+          color: 'rgba(101, 78, 52, 0.55)',   /* warm brown to match cream bg */
+        }}
+      >
+        <Icon size={size} strokeWidth={1.2} />
+      </div>
+    ))}
+  </>
+);
+
 
 /* ─────────────────────────────────────────
    Data
@@ -157,8 +211,7 @@ const ContactForm = () => {
     gap: '18px',
     width: '50%',
     marginLeft: '45%',
-    marginTop: '9%',
-    marginRight: '10%',
+    marginTop: '6%'
   }}
 >
       <div style={{ display: 'flex', gap: '16px', width: '100%' }}>
@@ -317,6 +370,10 @@ const Help = () => {
 
       {/* ── Categories ── */}
       <section className="help-categories-section">
+
+        {/* Floating icons — behind all content */}
+        <FloatingIcons />
+
         <div className="help-inner">
           <h2 className="help-section-title">Browse by category</h2>
           <div className="help-categories-grid">
@@ -351,6 +408,10 @@ const Help = () => {
 
       {/* ── FAQ ── */}
       <section className="help-faq-section" id="faq-section">
+
+        {/* Floating icons — behind all content */}
+        <FloatingIcons />
+
         <div className="help-inner">
           <div className="help-faq-header">
             <h2 className="help-section-title">
@@ -390,6 +451,10 @@ const Help = () => {
 
       {/* ── Contact Support ── */}
       <section className="help-contact-section">
+
+          {/* Floating icons — behind all content */}
+        <FloatingIcons />
+
         <div className="help-inner">
           {/* Inline styles used to guarantee layout — global CSS was overriding grid */}
           <div style={{

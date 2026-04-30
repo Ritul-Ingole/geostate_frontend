@@ -167,6 +167,8 @@
   display: grid;
   grid-template-columns: repeat(auto-fill, minmax(240px, 1fr));
   gap: 20px;
+  position: relative;  /* add this */
+  z-index: 1;
 }
 
 .help-category-card {
@@ -285,6 +287,8 @@
   border-radius: 14px;
   overflow: hidden;
   background: #fff;
+  position: relative;  /* add this */
+  z-index: 1;
 }
 
 .faq-item {
@@ -384,6 +388,11 @@
   align-items: start;
   width: 100%;
   box-sizing: border-box;
+}
+
+.help-inner{
+  position: relative;  /* add this */
+  z-index: 1;
 }
 
 .help-contact-grid > * {
