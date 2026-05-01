@@ -1,6 +1,7 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useRef } from 'react';
 import { useNavigate, Link } from 'react-router-dom';
-import { Search, Home, Key, TrendingUp, MapPin, ArrowRight, Building2, Ruler, FileText, Compass, IndianRupee } from 'lucide-react';
+import { Search, Home, Key, TrendingUp, MapPin, ArrowRight, Building2, Ruler, FileText, Compass, IndianRupee, ChevronDown, User, Heart, ListChecks, Settings, LogOut } from 'lucide-react';
+import { useAuth } from '../context/AuthContext';
 import '../styles/Landing.css';
 
 /* ─────────────────────────────────────────
@@ -61,6 +62,35 @@ const Landing = () => {
   const [searchQuery, setSearchQuery] = useState('');
   const [scrolled, setScrolled]       = useState(false);
   const navigate = useNavigate();
+
+  const { user, logout, isAuthenticated } = useAuth();
+  const [dropdownOpen, setDropdownOpen] = useState(false);
+  const dropdownRef = useRef(null);
+
+  useEffect(() => {
+    const handler = (e) => {
+      if (dropdownRef.current && !dropdownRef.current.contains(e.target)) {
+        setDropdownOpen(false);
+      }
+    };
+    document.addEventListener('mousedown', handler);
+    return () => document.removeEventListener('mousedown', handler);
+  }, []);
+
+  const handleLogout = () => {
+    setDropdownOpen(false);
+    logout();
+    navigate('/landing');
+  };
+
+  const go = (path) => {
+    setDropdownOpen(false);
+    navigate(path);
+  };
+
+  const initials = user?.name
+    ? user.name.split(' ').map(n => n[0]).join('').toUpperCase().slice(0, 2)
+    : '?';
 
   // Navbar becomes opaque on scroll
   useEffect(() => {
@@ -127,9 +157,52 @@ const Landing = () => {
 
           <div className="landing-nav-actions">
             <a href="/help" className="nav-action">Help</a>
-            <button className="signin-button" onClick={() => navigate('/login')}>
-              Sign in
-            </button>
+
+            {isAuthenticated ? (
+              <div className="landing-dropdown-wrap" ref={dropdownRef}>
+                <button
+                  className={`landing-user-trigger ${dropdownOpen ? 'active' : ''}`}
+                  onClick={() => setDropdownOpen(o => !o)}
+                >
+                  <div className="landing-avatar">{initials}</div>
+                  <span className="landing-trigger-name">{user?.name}</span>
+                  <ChevronDown size={14} className={`landing-chevron ${dropdownOpen ? 'rotated' : ''}`} />
+                </button>
+
+                {dropdownOpen && (
+                  <div className="landing-dropdown">
+                    <div className="landing-dropdown-header">
+                      <div className="landing-dropdown-avatar">{initials}</div>
+                      <div>
+                        <p className="landing-dropdown-name">{user?.name}</p>
+                        <p className="landing-dropdown-email">{user?.email}</p>
+                      </div>
+                    </div>
+                    <div className="landing-dropdown-divider" />
+                    <button className="landing-dropdown-item" onClick={() => go('/profile')}>
+                      <User size={14} /> My Profile
+                    </button>
+                    <button className="landing-dropdown-item" onClick={() => go('/favourites')}>
+                      <Heart size={14} /> Favourite Properties
+                    </button>
+                    <button className="landing-dropdown-item" onClick={() => go('/my-listings')}>
+                      <ListChecks size={14} /> My Listings
+                    </button>
+                    <button className="landing-dropdown-item" onClick={() => go('/settings')}>
+                      <Settings size={14} /> Settings
+                    </button>
+                    <div className="landing-dropdown-divider" />
+                    <button className="landing-dropdown-item landing-logout" onClick={handleLogout}>
+                      <LogOut size={14} /> Logout
+                    </button>
+                  </div>
+                )}
+              </div>
+            ) : (
+              <button className="signin-button" onClick={() => navigate('/login')}>
+                Sign in
+              </button>
+            )}
           </div>
         </div>
       </nav>
