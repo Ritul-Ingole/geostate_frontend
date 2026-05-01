@@ -199,7 +199,7 @@ const Landing = () => {
                 )}
               </div>
             ) : (
-              <button className="signin-button" onClick={() => navigate('/login')}>
+              <button className="signin-button" onClick={() => navigate('/login', { state: { from: { pathname: '/landing' } } })}>
                 Sign in
               </button>
             )}
