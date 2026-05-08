@@ -13,6 +13,7 @@ import Help from './pages/Help';
 import MyProfile from './pages/MyProfile';
 import { AuthProvider } from './context/AuthContext';
 import ProtectedRoute from './components/ProtectedRoute';
+import SavedProperties from "./pages/SavedProperties";
 import "./styles/App.css";
 
 function App() {
@@ -59,7 +60,12 @@ function App() {
 
         {/* Catch all → Landing */}
         <Route path="*" element={<Navigate to="/" replace />} />
+
+        {/* Saved Properties - protected */}
+      <Route path="/saved-properties" element={<SavedProperties />} />
       </Routes>
+
+      
 
     </AuthProvider>
   );

@@ -17,6 +17,8 @@ import {
 } from "lucide-react";
 import "../styles/PropertyDetails.css";
 
+const API = process.env.REACT_APP_API_URL || "http://localhost:8000/api";
+
 function PropertyDetails() {
   const { id } = useParams();
   const navigate = useNavigate();
@@ -24,18 +26,31 @@ function PropertyDetails() {
   const [isFavorite, setIsFavorite] = useState(false);
 
   useEffect(() => {
-    fetch(`http://localhost:8000/api/properties/${id}`, {
-      cache: "no-store"
-    })
-    .then((res) => res.json())
-    .then((data) => {
-      console.log("Property fetched:", data.data);
-      setProperty(data.data);
-    })
-    .catch((error) => {
-      console.error("Error fetching property:", error);
-    });
+    const token = localStorage.getItem("token");
+
+    fetch(`http://localhost:8000/api/properties/${id}`, { cache: "no-store" })
+      .then((res) => res.json())
+      .then((data) => {
+        setProperty(data.data);
+      })
+      .catch((err) => console.error("Error fetching property:", err));
+
+    // Check if already saved
+    if (token) {
+      fetch(`${API}/auth/saved-properties`, {
+        headers: { Authorization: `Bearer ${token}` },
+      })
+        .then((res) => res.json())
+        .then((data) => {
+          if (data.success) {
+            const alreadySaved = data.properties.some((p) => p._id === id);
+            setIsFavorite(alreadySaved);
+          }
+        })
+        .catch(() => {});
+    }
   }, [id]);
+
 
   const formatPrice = (price) => {
     if (price >= 10000000) return `₹${(price / 10000000).toFixed(2)} Cr`;
@@ -91,7 +106,16 @@ function PropertyDetails() {
           </button>
           <button 
             className={`action-btn favorite ${isFavorite ? 'active' : ''}`}
-            onClick={() => setIsFavorite(!isFavorite)}
+            onClick={async () => {
+              const token = localStorage.getItem("token");
+              if (!token) { navigate("/login"); return; }
+              const res = await fetch(`${API}/auth/save-property/${id}`, {
+                method: "POST",
+                headers: { Authorization: `Bearer ${token}` },
+              });
+              const data = await res.json();
+              if (data.success) setIsFavorite(data.saved);
+            }}
           >
             <Heart size={20} fill={isFavorite ? 'currentColor' : 'none'} />
             <span>Save</span>

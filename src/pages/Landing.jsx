@@ -182,7 +182,7 @@ const Landing = () => {
                     <button className="landing-dropdown-item" onClick={() => go('/my-profile')}>
                       <User size={14} /> My Profile
                     </button>
-                    <button className="landing-dropdown-item" onClick={() => go('/favourites')}>
+                    <button className="landing-dropdown-item" onClick={() => go('/saved-properties')}>
                       <Heart size={14} /> Favourite Properties
                     </button>
                     <button className="landing-dropdown-item" onClick={() => go('/my-listings')}>

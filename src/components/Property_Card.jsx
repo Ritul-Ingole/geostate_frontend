@@ -1,11 +1,30 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { ChevronLeft, ChevronRight, Heart, MapPin } from 'lucide-react';
 import '../styles/PropertyCard.css';
 import { useNavigate } from "react-router-dom";
 
+const API = process.env.REACT_APP_API_URL || "http://localhost:8000/api";
+
 const PropertyCard = ({ property, isHighlighted, onMouseEnter, onMouseLeave }) => {
   const [currentImageIndex, setCurrentImageIndex] = useState(0);
   const [isFavorite, setIsFavorite] = useState(false);
+
+  useEffect(() => {
+    const token = localStorage.getItem("token");
+    if (!token) return;
+    fetch(`${API}/auth/saved-properties`, {
+      headers: { Authorization: `Bearer ${token}` },
+    })
+      .then((res) => res.json())
+      .then((data) => {
+        if (data.success) {
+          const alreadySaved = data.properties.some((p) => p._id === property._id);
+          setIsFavorite(alreadySaved);
+        }
+      })
+      .catch(() => {});
+  }, [property._id]);
+
   const navigate = useNavigate();
 
   const images = property.images && property.images.length > 0 ? property.images : [];
@@ -24,9 +43,16 @@ const PropertyCard = ({ property, isHighlighted, onMouseEnter, onMouseLeave }) =
     setCurrentImageIndex((prev) => (prev + 1) % images.length);
   };
 
-  const toggleFavorite = (e) => {
+  const toggleFavorite = async (e) => {
     e.stopPropagation();
-    setIsFavorite(!isFavorite);
+    const token = localStorage.getItem("token");
+    if (!token) { navigate("/login"); return; }
+    const res = await fetch(`${API}/auth/save-property/${property._id}`, {
+      method: "POST",
+      headers: { Authorization: `Bearer ${token}` },
+    });
+    const data = await res.json();
+    if (data.success) setIsFavorite(data.saved);
   };
 
   const formatPrice = (price) => {

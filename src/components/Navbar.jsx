@@ -89,7 +89,7 @@ const Navbar = () => {
                     <User size={15} />
                     My Profile
                   </button>
-                  <button className="nav-dropdown-item" onClick={() => go('/favourites')}>
+                  <button className="nav-dropdown-item" onClick={() => go('/saved-properties')}>
                     <Heart size={15} />
                     Favourite Properties
                   </button>
