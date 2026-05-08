@@ -179,7 +179,7 @@ const Landing = () => {
                       </div>
                     </div>
                     <div className="landing-dropdown-divider" />
-                    <button className="landing-dropdown-item" onClick={() => go('/profile')}>
+                    <button className="landing-dropdown-item" onClick={() => go('/my-profile')}>
                       <User size={14} /> My Profile
                     </button>
                     <button className="landing-dropdown-item" onClick={() => go('/favourites')}>
