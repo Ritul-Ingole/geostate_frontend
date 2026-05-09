@@ -1,5 +1,6 @@
 import { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
+import { Building2, Calculator, TrendingUp, GitCompare, Table, ChevronDown, ChevronUp, Info, Home, MapPin, Key, Ruler, FileText, Compass, IndianRupee } from 'lucide-react';
 
 const API = process.env.REACT_APP_API_URL || "http://localhost:8000/api";
 
@@ -328,6 +329,19 @@ export default function SavedProperties() {
       />
       <div style={styles.page}>
         <div style={styles.container}>
+
+          {/* ── Navbar ── */}
+          <nav className="mort-nav">
+            <div className="mort-nav-inner">
+              <div className="mort-logo" onClick={() => navigate('/landing')}>
+                <Building2 size={22} />
+                <span>GeoState</span>
+              </div>
+              <button className="mort-back" onClick={() => navigate('/landing')}>← Back</button>
+            </div>
+          </nav>
+
+          <br></br>
 
           {/* Header */}
           <div style={styles.header}>

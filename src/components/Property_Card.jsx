@@ -1,29 +1,12 @@
-import React, { useState, useEffect } from 'react';
-import { ChevronLeft, ChevronRight, Heart, MapPin } from 'lucide-react';
+import React, { useState } from 'react';
+import { ChevronLeft, ChevronRight, Heart } from 'lucide-react';
 import '../styles/PropertyCard.css';
 import { useNavigate } from "react-router-dom";
 
-const API = process.env.REACT_APP_API_URL || "http://localhost:8000/api";
 
-const PropertyCard = ({ property, isHighlighted, onMouseEnter, onMouseLeave }) => {
+const PropertyCard = ({ property, isHighlighted, onMouseEnter, onMouseLeave, savedIds = [], setSavedIds }) => {
   const [currentImageIndex, setCurrentImageIndex] = useState(0);
-  const [isFavorite, setIsFavorite] = useState(false);
-
-  useEffect(() => {
-    const token = localStorage.getItem("token");
-    if (!token) return;
-    fetch(`${API}/auth/saved-properties`, {
-      headers: { Authorization: `Bearer ${token}` },
-    })
-      .then((res) => res.json())
-      .then((data) => {
-        if (data.success) {
-          const alreadySaved = data.properties.some((p) => p._id === property._id);
-          setIsFavorite(alreadySaved);
-        }
-      })
-      .catch(() => {});
-  }, [property._id]);
+  const isFavorite = savedIds.includes(property._id);
 
   const navigate = useNavigate();
 
@@ -47,12 +30,16 @@ const PropertyCard = ({ property, isHighlighted, onMouseEnter, onMouseLeave }) =
     e.stopPropagation();
     const token = localStorage.getItem("token");
     if (!token) { navigate("/login"); return; }
-    const res = await fetch(`${API}/auth/save-property/${property._id}`, {
+    const res = await fetch(`http://localhost:8000/api/auth/save-property/${property._id}`, {
       method: "POST",
       headers: { Authorization: `Bearer ${token}` },
     });
     const data = await res.json();
-    if (data.success) setIsFavorite(data.saved);
+    if (data.success) {
+      setSavedIds((prev) =>
+        data.saved ? [...prev, property._id] : prev.filter((id) => id !== property._id)
+      );
+    }
   };
 
   const formatPrice = (price) => {

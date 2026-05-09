@@ -85,7 +85,7 @@ const Navbar = () => {
 
                   <div className="nav-dropdown-divider" />
 
-                  <button className="nav-dropdown-item" onClick={() => go('/profile')}>
+                  <button className="nav-dropdown-item" onClick={() => go('/my-profile')}>
                     <User size={15} />
                     My Profile
                   </button>

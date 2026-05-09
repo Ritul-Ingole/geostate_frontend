@@ -345,15 +345,17 @@ export default function MyProfile() {
         <div style={styles.container}>
 
           {/* ── Navbar ── */}
-      <nav className="mort-nav">
-        <div className="mort-nav-inner">
-          <div className="mort-logo" onClick={() => navigate('/landing')}>
-            <Building2 size={22} />
-            <span>GeoState</span>
-          </div>
-          <button className="mort-back" onClick={() => navigate('/landing')}>← Back</button>
-        </div>
-      </nav>
+          <nav className="my-profile-nav">
+            <div className="my-profile-nav-inner">
+              <div className="my-profile-logo" onClick={() => navigate('/landing')}>
+                <Building2 size={22} />
+                <span>GeoState</span>
+              </div>
+              <button className="my-profile-back" onClick={() => navigate('/landing')}>← Back</button>
+            </div>
+          </nav>
+
+          <br></br>
 
           {/* Top grid — identity card + stats+actions */}
           <div style={styles.topGrid}>

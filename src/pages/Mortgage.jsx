@@ -153,6 +153,7 @@ export default function Mortgage() {
     <div className="mort-page">
       {/* Floating icons — behind all content */}
         <FloatingIcons />
+        
       {/* ── Navbar ── */}
       <nav className="mort-nav">
         <div className="mort-nav-inner">

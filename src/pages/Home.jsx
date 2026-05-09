@@ -17,6 +17,7 @@ function Home() {
   const [maxPrice, setMaxPrice] = useState(100000000);
   const [searchText, setSearchText] = useState("");
   const [gridKey, setGridKey] = useState(0); // forces re-animation on filter change
+  const [savedIds, setSavedIds] = useState([]);
 
   const cardRefs = useRef({});
 
@@ -40,6 +41,19 @@ function Home() {
       }
     };
     fetchProperties();
+  }, []);
+
+  useEffect(() => {
+    const token = localStorage.getItem("token");
+    if (!token) return;
+    fetch("http://localhost:8000/api/auth/saved-properties", {
+      headers: { Authorization: `Bearer ${token}` },
+    })
+      .then((res) => res.json())
+      .then((data) => {
+        if (data.success) setSavedIds(data.properties.map((p) => p._id));
+      })
+      .catch(() => {});
   }, []);
 
   // Apply filters
@@ -238,6 +252,8 @@ function Home() {
                       isHighlighted={activePropertyId === property._id.toString()}
                       onMouseEnter={() => setActivePropertyId(property._id.toString())}
                       onMouseLeave={() => setActivePropertyId(null)}
+                      savedIds={savedIds}
+                      setSavedIds={setSavedIds}
                     />
                   </div>
                 ))

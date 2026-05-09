@@ -14,6 +14,7 @@ import MyProfile from './pages/MyProfile';
 import { AuthProvider } from './context/AuthContext';
 import ProtectedRoute from './components/ProtectedRoute';
 import SavedProperties from "./pages/SavedProperties";
+import MyListings from "./pages/MyListings";
 import "./styles/App.css";
 
 function App() {
@@ -63,6 +64,9 @@ function App() {
 
         {/* Saved Properties - protected */}
       <Route path="/saved-properties" element={<SavedProperties />} />
+
+        {/* My Listings - protected */}
+        <Route path="/my-listings" element={<MyListings />} />
       </Routes>
 
       
