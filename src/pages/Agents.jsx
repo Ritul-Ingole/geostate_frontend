@@ -316,7 +316,7 @@ const Agents = () => {
             <Building2 size={22} />
             <span>GeoState</span>
           </div>
-          <button className="agents-back" onClick={() => navigate('/landing')}>← Back</button>
+          <button className="agents-back" onClick={() => navigate(-1)}>← Back</button>
         </div>
       </nav>
 

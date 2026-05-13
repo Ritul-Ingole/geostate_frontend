@@ -218,7 +218,7 @@ function Sell() {
             <Building2 size={22} />
             <span>GeoState</span>
           </div>
-          <button className="sell-back" onClick={() => navigate('/landing')}>← Back</button>
+          <button className="sell-back" onClick={() => navigate(-1)}>← Back</button>
         </div>
       </nav>
 

@@ -324,7 +324,7 @@ const Help = () => {
           </div>
           
           <div className="landing-nav-actions">
-            <button className="sell-back" onClick={() => navigate('/landing')}>← Back</button>
+            <button className="sell-back" onClick={() => navigate(-1)}>← Back</button>
           </div>
         </div>
       </nav>

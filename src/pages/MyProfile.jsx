@@ -32,13 +32,13 @@ const styles = {
     width: 72,
     height: 72,
     borderRadius: "50%",
-    background: "#1a1a2e",
+    background: "#1b5e3b",
     display: "flex",
     alignItems: "center",
     justifyContent: "center",
     fontSize: 26,
     fontWeight: 600,
-    color: "#e8c97e",
+    color: "#ffffff",
     marginBottom: "1rem",
     letterSpacing: 1,
   },
@@ -116,9 +116,9 @@ const styles = {
     transition: "background 0.15s",
   },
   actionBtnPrimary: {
-    background: "#1a1a2e",
-    color: "#e8c97e",
-    border: "1px solid #1a1a2e",
+    background: "#1b5e3b",
+    color: "#ffffff",
+    border: "1px solid #1b5e3b",
   },
   infoRow: {
     display: "flex",
@@ -244,8 +244,8 @@ export default function MyProfile() {
   const [form, setForm] = useState({ name: "", phone: "" });
   const [saving, setSaving] = useState(false);
   const [msg, setMsg] = useState({ type: "", text: "" });
-
   const token = localStorage.getItem("token");
+  const [savedCount, setSavedCount] = useState(0);
 
   useEffect(() => {
     if (!token) {
@@ -275,8 +275,17 @@ export default function MyProfile() {
         setForm({ name: userData.user.name, phone: userData.user.phone || "" });
       }
       if (listingsData.success) {
-        setListings(listingsData.properties || []);
+        setListings(listingsData.data || []);
       }
+
+      const savedRes = await fetch(`${API}/auth/saved-properties`, {
+        headers: { Authorization: `Bearer ${token}` },
+      });
+      const savedData = await savedRes.json();
+      // Store the count — add a state variable:
+      // const [savedCount, setSavedCount] = useState(0);
+      if (savedData.success) setSavedCount(savedData.properties?.length || 0);
+
     } catch (err) {
       console.error("Failed to load profile:", err);
     } finally {
@@ -351,11 +360,16 @@ export default function MyProfile() {
                 <Building2 size={22} />
                 <span>GeoState</span>
               </div>
-              <button className="my-profile-back" onClick={() => navigate('/landing')}>← Back</button>
+              <button className="my-profile-back" onClick={() => navigate(-1)}>← Back</button>
             </div>
           </nav>
 
-          <br></br>
+
+          <div style={{ padding: "1.5rem 1.5rem ", maxWidth: 1000, margin: "0 auto" }}>
+            <p style={{ fontFamily: "'Syne', sans-serif", fontSize: 26, fontWeight: 700, color: "#1a1a1a", margin: 0, letterSpacing: "-0.02em" }}>
+              My Profile
+            </p>
+          </div>
 
           {/* Top grid — identity card + stats+actions */}
           <div style={styles.topGrid}>
@@ -397,7 +411,25 @@ export default function MyProfile() {
 
               <button
                 onClick={handleLogout}
-                style={{ ...styles.actionBtn, color: "#c0392b", borderColor: "#fde8e8", background: "#fff9f9" }}
+                style={{
+                  ...styles.actionBtn,
+                  color: "#c0392b",
+                  borderColor: "#fde8e8",
+                  background: "#fff9f9",
+                  justifyContent: "center",
+                  textAlign: "center",
+                  transition: "all 0.2s",
+                }}
+                onMouseEnter={e => {
+                  e.currentTarget.style.background = "#c0392b";
+                  e.currentTarget.style.color = "#fff";
+                  e.currentTarget.style.borderColor = "#c0392b";
+                }}
+                onMouseLeave={e => {
+                  e.currentTarget.style.background = "#fff9f9";
+                  e.currentTarget.style.color = "#c0392b";
+                  e.currentTarget.style.borderColor = "#fde8e8";
+                }}
               >
                 Log out
               </button>
@@ -408,7 +440,7 @@ export default function MyProfile() {
               {/* Stats */}
               <div style={styles.statGrid}>
                 <div style={styles.statCard}>
-                  <p style={styles.statNum}>0</p>
+                  <p style={styles.statNum}>{savedCount}</p>
                   <p style={styles.statLabel}>Saved Properties</p>
                 </div>
                 <div style={styles.statCard}>

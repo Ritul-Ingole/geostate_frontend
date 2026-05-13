@@ -23,9 +23,11 @@ const styles = {
   },
   pageTitle: {
     fontSize: 26,
-    fontWeight: 600,
+    fontWeight: 700,
     color: "#1a1a1a",
-    margin: 0,
+    margin: "0 0 4px",
+    fontFamily: "'Syne', sans-serif",  // add this
+    letterSpacing: "-0.02em",
   },
   pageSubtitle: {
     fontSize: 13,
@@ -51,9 +53,9 @@ const styles = {
     transition: "all 0.15s",
   },
   filterBtnActive: {
-    background: "#1a1a2e",
-    color: "#e8c97e",
-    border: "1px solid #1a1a2e",
+    background: "#1b5e3b",
+    color: "#ffffff",
+    border: "1px solid #1b5e3b",
   },
   priceSelect: {
     padding: "8px 14px",
@@ -109,8 +111,8 @@ const styles = {
     borderRadius: 20,
     fontSize: 11,
     fontWeight: 600,
-    background: "#1a1a2e",
-    color: "#e8c97e",
+    background: "#1b5e3b",
+    color: "#ffffff",
     textTransform: "uppercase",
     letterSpacing: "0.05em",
   },
@@ -123,6 +125,7 @@ const styles = {
     borderRadius: "50%",
     border: "none",
     background: "#fff",
+    color: "#c0392b",
     display: "flex",
     alignItems: "center",
     justifyContent: "center",
@@ -168,9 +171,9 @@ const styles = {
     flex: 1,
     padding: "9px 0",
     borderRadius: 10,
-    border: "1px solid #1a1a2e",
-    background: "#1a1a2e",
-    color: "#e8c97e",
+    border: "1px solid #1b5e3b",
+    background: "#1b5e3b",
+    color: "#ffffff",
     fontSize: 13,
     fontWeight: 500,
     cursor: "pointer",
@@ -308,7 +311,8 @@ export default function SavedProperties() {
   const filtered = properties.filter((p) => {
     const typeMatch =
       typeFilter === "all" ||
-      (p.listingType || "").toLowerCase() === typeFilter;
+      (typeFilter === "buy" && p.purpose === "sell") ||
+      (typeFilter === "rent" && p.purpose === "rent");
     const priceMatch = p.price >= range.min && p.price <= range.max;
     return typeMatch && priceMatch;
   });
@@ -337,7 +341,7 @@ export default function SavedProperties() {
                 <Building2 size={22} />
                 <span>GeoState</span>
               </div>
-              <button className="mort-back" onClick={() => navigate('/landing')}>← Back</button>
+              <button className="mort-back" onClick={() => navigate(-1)}>← Back</button>
             </div>
           </nav>
 
@@ -427,7 +431,7 @@ export default function SavedProperties() {
                   <div style={styles.imageWrap}>
                     {property.images && property.images[0] ? (
                       <img
-                        src={`http://localhost:8000${property.images[0]}`}
+                        src={property.images[0]}
                         alt={property.title}
                         style={styles.img}
                       />

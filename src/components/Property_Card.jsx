@@ -79,7 +79,7 @@ const PropertyCard = ({ property, isHighlighted, onMouseEnter, onMouseLeave, sav
       {/* Image Section */}
       <div className="zillow-image-container">
         <img 
-          src={imageUrl} 
+          src={property.images[0]}
           alt={property.title}
           className="zillow-image"
           onError={(e) => {

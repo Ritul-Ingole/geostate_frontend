@@ -115,13 +115,13 @@ export default function MyListings() {
       <div className="ml-container">
 
         {/* ── Navbar ── */}
-        <nav className="mort-nav">
-          <div className="mort-nav-inner">
-            <div className="mort-logo" onClick={() => navigate('/landing')}>
+        <nav className="ml-nav">
+          <div className="ml-nav-inner">
+            <div className="ml-logo" onClick={() => navigate('/landing')}>
               <Building2 size={22} />
               <span>GeoState</span>
             </div>
-            <button className="mort-back" onClick={() => navigate('/landing')}>← Back</button>
+            <button className="ml-back" onClick={() => navigate(-1)}>← Back</button>
           </div>
         </nav>
 
