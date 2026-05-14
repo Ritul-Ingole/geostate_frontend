@@ -275,8 +275,13 @@
   line-height: 1.6;
   margin: 0;
   display: -webkit-box;
-  -webkit-line-clamp: 3;
   -webkit-box-orient: vertical;
+
+  /* Standard property */
+  line-clamp: 3;
+
+  /* Current browser support */
+  -webkit-line-clamp: 3;
   overflow: hidden;
 }
 
