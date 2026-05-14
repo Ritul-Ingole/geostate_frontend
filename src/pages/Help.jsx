@@ -1,8 +1,8 @@
 import React, { useState, useMemo } from 'react';
-import { useNavigate, Link } from 'react-router-dom';
+import { useNavigate } from 'react-router-dom';
 import {
   Building2, Search, Home, Tag, Users, CreditCard,
-  ChevronDown, ChevronUp, Mail, Send, CheckCircle,
+  ChevronDown, Mail, Send, CheckCircle,
   MessageSquare, AlertCircle, ArrowRight, X, MapPin, Key, TrendingUp, Ruler, FileText, Compass, IndianRupee
 } from 'lucide-react';
 import '../styles/Help.css';
@@ -168,9 +168,11 @@ const FAQItem = ({ faq, isOpen, onToggle }) => (
   <div className={`faq-item ${isOpen ? 'faq-item-open' : ''}`}>
     <button className="faq-question" onClick={onToggle}>
       <span>{faq.q}</span>
-      {isOpen ? <ChevronUp size={18} /> : <ChevronDown size={18} />}
+      <ChevronDown size={18} className={`faq-chevron ${isOpen ? 'rotated' : ''}`} />
     </button>
-    {isOpen && <div className="faq-answer">{faq.a}</div>}
+    <div className={`faq-answer-wrap ${isOpen ? 'open' : ''}`}>
+      <div className="faq-answer">{faq.a}</div>
+    </div>
   </div>
 );
 

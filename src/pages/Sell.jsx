@@ -1,6 +1,6 @@
 import { useState, useEffect, useRef } from 'react';
 import { useNavigate } from 'react-router-dom';
-import { Upload, X, MapPin, Home, DollarSign, CheckCircle, AlertCircle, Loader, Building2, Key, TrendingUp, Ruler, FileText, Compass, IndianRupee } from 'lucide-react';
+import { Upload, X, MapPin, Home, CheckCircle, AlertCircle, Loader, Building2, Key, TrendingUp, Ruler, FileText, Compass, IndianRupee } from 'lucide-react';
 import axios from 'axios';
 import '../styles/Sell.css';
 
@@ -211,6 +211,9 @@ function Sell() {
   return (
     <div className="sell-page">
 
+      {/* Floating icons — behind all content */}
+          <FloatingIcons />
+
       {/* Navbar */}
       <nav className="sell-nav">
         <div className="sell-nav-inner">
@@ -233,8 +236,7 @@ function Sell() {
           ))}
         </div>
 
-        {/* Floating icons — behind all content */}
-          <FloatingIcons />
+        
           
         {/* Form card */}
         <div className="sell-card">

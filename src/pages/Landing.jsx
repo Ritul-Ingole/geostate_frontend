@@ -122,7 +122,7 @@ const Landing = () => {
           </div>
 
           <div className="landing-nav-links">
-            <Link to="/home?purpose=buy" className="nav-link">Buy</Link>
+            <Link to="/home?purpose=sell" className="nav-link">Buy</Link>
             <Link to="/home?purpose=rent" className="nav-link">Rent</Link>
             <span
               className="nav-link"
@@ -376,7 +376,7 @@ const Landing = () => {
               No matter what path you take to sell your home, we can help you
               navigate a successful sale at the best price.
             </p>
-            <button className="service-button">
+            <button className="service-button" onClick={() => navigate('/sell')}>
               See your options <ArrowRight size={14} />
             </button>
             <div className="service-card-fill" />
