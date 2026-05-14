@@ -192,12 +192,14 @@
   max-width: 1200px;
   margin: 0 auto;
   padding: 40px 24px 80px;
+  z-index: 5;
 }
 
 .agents-grid {
   display: grid;
   grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
   gap: 24px;
+  z-index: 50;
 }
 
 /* ─────────────────────────────────────────
@@ -212,6 +214,7 @@
   flex-direction: column;
   gap: 16px;
   transition: transform 0.25s ease, box-shadow 0.25s ease;
+  z-index: 50;
 }
 
 .agent-card:hover {

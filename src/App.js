@@ -15,6 +15,7 @@ import { AuthProvider } from './context/AuthContext';
 import ProtectedRoute from './components/ProtectedRoute';
 import SavedProperties from "./pages/SavedProperties";
 import MyListings from "./pages/MyListings";
+import Settings from './pages/Settings';
 import "./styles/App.css";
 
 function App() {
@@ -67,9 +68,15 @@ function App() {
 
         {/* My Listings - protected */}
         <Route path="/my-listings" element={<MyListings />} />
+
+         {/* Settings page - protected */}
+        <Route path="/settings" element={<Settings />} />
+
+
+
       </Routes>
 
-      
+       
 
     </AuthProvider>
   );
