@@ -28,12 +28,12 @@ const FLOAT_ICONS = [
 const floatAnimStyles = `
   @keyframes geoFloat {
     0%   { transform: translateY(0px);    opacity: 0.13; }
-    50%  { transform: translateY(-18px);  opacity: 0.22; }
+    50%  { transform: translateY(-38px);  opacity: 0.22; }
     100% { transform: translateY(0px);    opacity: 0.13; }
   }
   @keyframes geoPulse {
     0%   { transform: scale(1);    opacity: 0.10; }
-    50%  { transform: scale(1.12); opacity: 0.20; }
+    50%  { transform: scale(1.3); opacity: 0.20; }
     100% { transform: scale(1);    opacity: 0.10; }
   }
 `;
@@ -288,6 +288,14 @@ const Help = () => {
     return () => window.removeEventListener('scroll', onScroll);
   }, []);
 
+  React.useEffect(() => {
+  if (window.location.hash === '#contact-section') {
+    setTimeout(() => {
+      document.getElementById('contact-section')?.scrollIntoView({ behavior: 'smooth' });
+    }, 150);
+  }
+  }, []);
+
   /* Filter FAQs by search + category */
   const filteredFAQs = useMemo(() => {
     return FAQS.filter((faq) => {
@@ -452,7 +460,10 @@ const Help = () => {
       </section>
 
       {/* ── Contact Support ── */}
-      <section className="help-contact-section">
+      <section
+        className="help-contact-section"
+        id="contact-section"
+      >
 
           {/* Floating icons — behind all content */}
         <FloatingIcons />

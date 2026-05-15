@@ -25,12 +25,12 @@ const FLOAT_ICONS = [
 const floatAnimStyles = `
   @keyframes geoFloat {
     0%   { transform: translateY(0px);    opacity: 0.13; }
-    50%  { transform: translateY(-18px);  opacity: 0.22; }
+    50%  { transform: translateY(-38px);  opacity: 0.22; }
     100% { transform: translateY(0px);    opacity: 0.13; }
   }
   @keyframes geoPulse {
     0%   { transform: scale(1);    opacity: 0.10; }
-    50%  { transform: scale(1.12); opacity: 0.20; }
+    50%  { transform: scale(1.3); opacity: 0.20; }
     100% { transform: scale(1);    opacity: 0.10; }
   }
 `;
@@ -406,21 +406,21 @@ const Landing = () => {
           <div className="footer-links">
             <div className="footer-column">
               <h4>Real Estate</h4>
-              <a href="#">Homes for sale</a>
-              <a href="#">Foreclosures</a>
-              <a href="#">For sale by owner</a>
+              <a href="/home?purpose=sell">Homes for sale</a>
+              <a href="/home?purpose=sell">Foreclosures</a>
+              <a href="/home?purpose=sell">For sale by owner</a>
             </div>
             <div className="footer-column">
               <h4>Rentals</h4>
-              <a href="#">Apartments for rent</a>
-              <a href="#">Houses for rent</a>
-              <a href="#">Post a rental</a>
+              <a href="/home?purpose=rent">Apartments for rent</a>
+              <a href="/home?purpose=rent">Houses for rent</a>
+              <a href="/home?purpose=rent">Post a rental</a>
             </div>
             <div className="footer-column">
               <h4>Resources</h4>
-              <a href="#">Blog</a>
-              <a href="#">Help centre</a>
-              <a href="#">Contact us</a>
+              <a href="/blog">Blog</a>
+              <a href="/help">Help centre</a>
+              <a href="/help#contact-section">Contact us</a>
             </div>
           </div>
         </div>

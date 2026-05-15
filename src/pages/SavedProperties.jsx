@@ -25,12 +25,12 @@ const FLOAT_ICONS = [
 const floatAnimStyles = `
   @keyframes geoFloat {
     0%   { transform: translateY(0px);    opacity: 0.13; }
-    50%  { transform: translateY(-18px);  opacity: 0.22; }
+    50%  { transform: translateY(-38px);  opacity: 0.22; }
     100% { transform: translateY(0px);    opacity: 0.13; }
   }
   @keyframes geoPulse {
     0%   { transform: scale(1);    opacity: 0.10; }
-    50%  { transform: scale(1.12); opacity: 0.20; }
+    50%  { transform: scale(1.3); opacity: 0.20; }
     100% { transform: scale(1);    opacity: 0.10; }
   }
 `;
@@ -328,6 +328,7 @@ export default function SavedProperties() {
   useEffect(() => {
     if (!token) { navigate("/login"); return; }
     fetchSaved();
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
   async function fetchSaved() {
